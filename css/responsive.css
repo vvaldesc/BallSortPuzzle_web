@@ -1,0 +1,42 @@
+
+.container__header{
+    grid-area: header;
+}
+
+.container__visor{
+    grid-area: visor;
+}
+
+.container__aside--r{
+    grid-area: asider;
+}
+
+.container__aside--l{
+    grid-area: asidel;
+}
+
+.container__footer{
+    grid-area: footer;
+}
+
+
+
+
+
+@media screen and (min-width: 1200px){
+    .container{
+        width: 1200px;
+
+        grid-template-columns: 1fr 6fr 1fr;
+        grid-template-rows: 100px 700px 100px;
+
+        grid-template-areas: 
+        "header header header"
+        "asidel visor asider"
+        "footer footer footer"
+        ;
+    }
+
+
+
+}

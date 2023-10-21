@@ -1,0 +1,17 @@
+.visor_header{
+
+}
+
+.container__visor{
+    position: relative;
+    background-image: url("../assets/png/—Pngtree—mountain\ background\ pixel\ scene_6021586.png");
+    background-size: cover;
+}
+
+.container__nubes--1{
+    position: absolute;
+    top: 50px;
+    left: 600px;
+    height: 150px;
+    width: 150px;
+}

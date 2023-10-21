@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    margin: auto;
+    border: 1px solid red;
+    display: grid;
+}
+
+.container__visor{
+    border: 1px solid blue;
+    background-color: rgb(175, 226, 255);
+}
