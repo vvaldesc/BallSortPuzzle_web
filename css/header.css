@@ -1,8 +1,10 @@
-.container__header{
-    
+.visor__header{
+    display: flex;
+    justify-content: center;
+    height: 100px;
 }
 
-.visor__header{
-    border: 1px solid green;
-    height: 100px;
+.header__tablero{
+    height: 120px;
+    width: 190px;
 }
