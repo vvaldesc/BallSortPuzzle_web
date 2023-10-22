@@ -4,7 +4,7 @@
 
 .container{
     margin: auto;
-    background-color: antiquewhite;
+    /*background-color: antiquewhite;*/
     display: grid;
     background-image: url("../assets/jpg/simon-sanchez-madera-tilex1.jpg");
     background-repeat: repeat;

@@ -10,3 +10,11 @@
     position: relative;
     z-index: 15;
 }
+
+.temporizador{
+    position: absolute;
+    top: 45px;
+    z-index: 20;
+    color: white;
+    font-size: 1.5em;
+}
