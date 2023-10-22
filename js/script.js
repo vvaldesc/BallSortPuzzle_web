@@ -65,7 +65,7 @@ const inicioJuego = () => {
     //inicioControles();
     inicioTempo();        
     }
-    inicioFIN();
+    //inicioFIN();
 
 }
 
