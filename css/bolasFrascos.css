@@ -5,4 +5,16 @@
     position: relative;
     top: 130px;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.pixel-ball {
+    width: 50px;
+    height: 50px;
+    background-color: #ff0000; /* Red color, you can change this to your preferred color */
+    border-radius: 50%; /* Makes it a circle */
+    display: inline-block;
+}
+  

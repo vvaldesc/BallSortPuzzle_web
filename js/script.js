@@ -19,10 +19,11 @@ const iniciaEntorno = (e) => {
         let bolas=document.createDocumentFragment();
         for (let index = 0; index < MAXbolas; index++) {
             let bola=document.createElement("DIV")
-            bola.innerText=Math.random()*MAXfrascos;
+            bola.classList.add("pixel-ball")
+            bola.innerText=Math.floor(Math.random()*MAXfrascos);
             bolas.append(bola)
         }
-        bolas.append(frasco)
+        frasco.append(bolas)
         frascos.append(frasco)
     }
     visor__main.append(frascos)
