@@ -13,4 +13,6 @@
 
 .container__visor{
     background-color: rgb(175, 226, 255);
+    position: relative;
+    z-index: 0;
 }

@@ -7,4 +7,6 @@
 .header__tablero{
     height: 120px;
     width: 190px;
+    position: relative;
+    z-index: 15;
 }

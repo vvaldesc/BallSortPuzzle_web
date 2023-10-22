@@ -3,13 +3,27 @@
     background-image: url("../assets/png/—Pngtree—mountain\ background\ pixel\ scene_6021586.png");
     background-size: cover;
     background-repeat: repeat-y;
+    z-index: 0;
 }
 
 .container__nubes--1{
     position: absolute;
-    z-index: 10;
+    z-index: 0;
     top: 50px;
-    left: 600px;
+    left: 0;
     height: 150px;
     width: 150px;
+}
+
+.animacion__infinito{
+    animation: nubes 60s linear infinite;
+    animation-delay: -15s;
+}
+
+@keyframes nubes {
+    from{
+        transform: translateX(+900px);
+    }to{
+        transform: translateX(-200px);
+    }
 }
