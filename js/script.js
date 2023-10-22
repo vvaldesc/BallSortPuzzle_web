@@ -1,9 +1,11 @@
 let visor__main=document.getElementById("visor__main")
+
+
 let MAXfrascos=6;
 let MAXbolas=7;
 let segundosIniciales=60;
 
-
+let FIN=false;
 
 
 /*const audioFondo = () => {
@@ -40,6 +42,25 @@ let frascos=document.createDocumentFragment();
 
 }
 
+const inicioTempo = () => {
+    debugger
+    let tiempo=3000;
+    const intervalo=setInterval(()=>{
+        tiempo--;
+
+        visor__main.previousElementSibling.children[1].textContent=tiempo;
+
+
+        if (tiempo==0) {
+            clearInterval(intervalo);
+        }
+    },1000);
+}
+
+const inicioJuego = () => {
+    //audioFondo();
+    inicioTempo();
+}
 
 visor__main.addEventListener("click",iniciaEntorno)
-//document.addEventListener("DOMContentLoaded",audioFondo)
+document.addEventListener("DOMContentLoaded",inicioJuego)
