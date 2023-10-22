@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/visor.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/visor.css" />
+    <link rel="stylesheet" href="css/bolasFrascos.css" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
 
     <title>Document</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
+      <header class="container__header"></header>
 
-        <header class="container__header">
-
+      <div class="container__visor">
+        <header class="visor__header">
+          <img
+            class="header__tablero"
+            src="assets/png/panel__recortado.png"
+            alt="Tablero"
+          />
+          <p class="temporizador">00:00</p>
         </header>
+        <img
+          class="container__nubes--1 animacion__infinito"
+          src="assets/png/—Pngtree—sky pixel art_7362579.png"
+          alt="nube"
+        />
+        <div class="ball voxel red"></div>
+      </div>
 
-        <div class="container__visor">
-            <header class="visor__header">
-                <img class="header__tablero" src="assets/png/panel__recortado.png" alt="Tablero">
-                <p class="temporizador">00:00</p>
-            </header>
-            <img class="container__nubes--1 animacion__infinito" src="assets/png/—Pngtree—sky pixel art_7362579.png" alt="nube">
+      <aside class="container__aside--r">
+
+        <div class="aside__container">
 
         </div>
 
-        <aside class="container__aside--r">
+      </aside>
 
-        </aside>
+      <aside class="container__aside--l">
 
-        <aside class="container__aside--l">
+        <div class="aside__container">
 
-        </aside>
+        </div>
 
-        <aside class="container__footer">
+      </aside>
 
-        </aside>
-
+      <aside class="container__footer"></aside>
     </div>
-
-</body>
-<script src="js/script.js"></script>
+  </body>
+  <script src="js/script.js"></script>
 </html>
