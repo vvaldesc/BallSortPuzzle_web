@@ -1,6 +1,6 @@
 let visor__main=document.getElementById("visor__main")
 
-
+let MAXniveles=3;
 let MAXfrascos=6;
 let MAXbolas=7;
 let segundosIniciales=60;
@@ -53,13 +53,20 @@ const inicioTempo = () => {
 
         if (tiempo==0) {
             clearInterval(intervalo);
+            FIN=true;
         }
     },1000);
 }
 
 const inicioJuego = () => {
     //audioFondo();
-    inicioTempo();
+    //inicioIntro();
+    for (let index = 0; index < MAXniveles; index++) {
+    //inicioControles();
+    inicioTempo();        
+    }
+    inicioFIN();
+
 }
 
 visor__main.addEventListener("click",iniciaEntorno)
