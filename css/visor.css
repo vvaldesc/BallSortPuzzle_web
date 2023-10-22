@@ -16,7 +16,7 @@
 }
 
 .animacion__infinito{
-    animation: nubes 6s linear infinite;
+    animation: nubes 60s linear infinite;
     animation-delay: -15s;
 }
 
