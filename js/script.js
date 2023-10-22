@@ -1,7 +1,9 @@
 let visor__main=document.getElementById("visor__main")
-let MAXfrascos=4;
-let MAXbolas=4;
+let MAXfrascos=6;
+let MAXbolas=7;
 let segundosIniciales=60;
+
+
 
 
 /*const audioFondo = () => {
@@ -12,9 +14,11 @@ let segundosIniciales=60;
 }*/
 
 
+//tiene que haber maxbolas de cada color
 const iniciaEntorno = (e) => {
 
-    let frascos=document.createDocumentFragment();
+
+let frascos=document.createDocumentFragment();
 
     for (let index = 0; index < MAXfrascos; index++) {
         let frasco=document.createElement("DIV")
@@ -24,7 +28,7 @@ const iniciaEntorno = (e) => {
         for (let index = 0; index < MAXbolas; index++) {
             let bola=document.createElement("DIV")
             bola.classList.add("pixel-ball")
-            bola.innerText=Math.floor(Math.random()*MAXfrascos);
+            bola.classList.add("color"+Math.floor(Math.random()*MAXfrascos))
             bolas.append(bola)
 
         }
@@ -33,7 +37,7 @@ const iniciaEntorno = (e) => {
 
     }
     visor__main.append(frascos)
-    
+
 }
 
 

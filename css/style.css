@@ -3,10 +3,10 @@
     
 }
 
-@font-face {
-    /*font-family: 'Pixelify Sans', sans-serif;
-    font-family: 'Playfair Display', serif;*/
-}
+/*@font-face {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-family: 'Playfair Display', serif;
+}*/
 
 
 .container{
@@ -30,6 +30,6 @@
     width: 100%;
     height: 100%;
     background-image: url("../assets/jpg/simon-sanchez-madera-tilex1.jpg");
-    background-repeat: repeat;
+    background-repeat: repeat-x;
     background-size: 400px;
 }
