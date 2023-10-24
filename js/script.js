@@ -196,6 +196,8 @@ const inicioIntro = () => {
 };
 
 const accionFrasco = (e) => {
+
+if (e.target.nodeName==="DIV") {
   debugger;
   console.log(click)
   let posicionMeter;
@@ -220,7 +222,11 @@ const accionFrasco = (e) => {
     click=true;
 
   }
-  //ganar();
+    //ganar();
+
+}
+
+
 }
 
 //audioFondo(); audio
