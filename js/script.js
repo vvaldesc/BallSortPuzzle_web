@@ -4,6 +4,7 @@ let MAXniveles=3;
 let MAXfrascos=6;
 let MAXbolas=7;
 let segundosIniciales=60;
+let character_1;
 
 let FIN=false;
 
@@ -43,13 +44,20 @@ let frascos=document.createDocumentFragment();
 }
 
 const inicioTempo = () => {
-    debugger
-    let tiempo=3000;
+    //debugger
+    let tiempo=61;
+
+    let minutos=Math.floor(tiempo/60).toString();
+    let segundos=Math.floor(tiempo%60).toString();
+    visor__main.previousElementSibling.children[1].textContent=minutos.padStart(2, "0")+":"+segundos.padStart(2,"0");
+
+
     const intervalo=setInterval(()=>{
         tiempo--;
 
-        visor__main.previousElementSibling.children[1].textContent=tiempo;
-
+        let minutos=Math.floor(tiempo/60).toString();
+        let segundos=Math.floor(tiempo%60).toString();
+        visor__main.previousElementSibling.children[1].textContent=minutos.padStart(2,"0")+":"+segundos.padStart(2,"0");
 
         if (tiempo==0) {
             clearInterval(intervalo);
@@ -58,16 +66,75 @@ const inicioTempo = () => {
     },1000);
 }
 
-const inicioJuego = () => {
-    //audioFondo();
-    //inicioIntro();
-    for (let index = 0; index < MAXniveles; index++) {
-    //inicioControles();
-    inicioTempo();        
+const inicioIntro = () => {
+
+    botonInicio=cargarBoton();
+
+    function cargarBoton() {
+        let botonInicio = document.createElement("A");
+        //botonInicio.classList.add("")
+        //debugger
+        botonInicio.style.position = "absolute";
+        botonInicio.style.height = "40px";
+        botonInicio.style.width = "40px";
+        botonInicio.style.border = "5px solid red";
+        botonInicio.style.top = "400px";
+        botonInicio.style.left = "600px";
+        visor__main.append(botonInicio);
+        return botonInicio
     }
+
+    function cargaPersonaje() {
+        let character_1 = document.createElement("IMG");
+        character_1.style.position = "absolute";
+        character_1.style.zIndex = "30";
+        character_1.style.height = "400px";
+        character_1.style.width = "400px";
+        character_1.style.left = "650px";
+        character_1.style.top = "90px";
+        character_1.src = "../assets/png/character_1.png";
+        return character_1;
+    }
+
+    const hablaPersonaje = () => {
+        for (let index = 0; index < 3; index++) {
+
+            const intervalo=setInterval(()=>{
+                character_1 = "../assets/png/character_2.png";
+            },300);
+
+        }    
+    }
+
+    debugger;
+
+    botonInicio = cargarBoton();
+    visor__main.append(botonInicio);
+
+    character_1 = cargaPersonaje();
+    visor__main.append(character_1);
+    
+    botonInicio.addEventListener("click",hablaPersonaje);
+
+}
+
+const inicioJuego = () => {
+    //audioFondo(); audio
+    //inicioIntro();  //intro
+
+
+    //Bucle niveles
+    //for (let index = 0; index < MAXniveles; index++) {
+        //inicioControles();
+        iniciaEntorno();
+        inicioTempo();
+    //}
+
+
+    //final
     //inicioFIN();
 
 }
 
-visor__main.addEventListener("click",iniciaEntorno)
+//visor__main.addEventListener("click",iniciaEntorno)
 document.addEventListener("DOMContentLoaded",inicioJuego)
