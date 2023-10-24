@@ -1,4 +1,5 @@
 let visor__main=document.getElementById("visor__main")
+let botonInicio=visor__main.children[1];
 
 let MAXniveles=3;
 let MAXfrascos=6;
@@ -20,6 +21,10 @@ let FIN=false;
 //tiene que haber maxbolas de cada color
 const iniciaEntorno = (e) => {
 
+//inicioTempo();
+debugger
+character_1=visor__main.getElementById("character_1");
+character_1.style.display="none";
 
 let frascos=document.createDocumentFragment();
 
@@ -67,23 +72,7 @@ const inicioTempo = () => {
 }
 
 const inicioIntro = () => {
-
-    botonInicio=cargarBoton();
-
-    function cargarBoton() {
-        let botonInicio = document.createElement("A");
-        //botonInicio.classList.add("")
-        //debugger
-        botonInicio.style.position = "absolute";
-        botonInicio.style.height = "40px";
-        botonInicio.style.width = "40px";
-        botonInicio.style.border = "5px solid red";
-        botonInicio.style.top = "400px";
-        botonInicio.style.left = "600px";
-        visor__main.append(botonInicio);
-        return botonInicio
-    }
-
+    
     function cargaPersonaje() {
         let character_1 = document.createElement("IMG");
         character_1.style.position = "absolute";
@@ -92,49 +81,39 @@ const inicioIntro = () => {
         character_1.style.width = "400px";
         character_1.style.left = "650px";
         character_1.style.top = "90px";
+        character_1.id="character_1";
         character_1.src = "../assets/png/character_1.png";
         return character_1;
     }
 
     const hablaPersonaje = () => {
         for (let index = 0; index < 3; index++) {
-
             const intervalo=setInterval(()=>{
                 character_1 = "../assets/png/character_2.png";
             },300);
-
         }    
     }
-
-    debugger;
-
-    botonInicio = cargarBoton();
-    visor__main.append(botonInicio);
 
     character_1 = cargaPersonaje();
     visor__main.append(character_1);
     
-    botonInicio.addEventListener("click",hablaPersonaje);
-
 }
 
-const inicioJuego = () => {
+
     //audioFondo(); audio
     //inicioIntro();  //intro
-
 
     //Bucle niveles
     //for (let index = 0; index < MAXniveles; index++) {
         //inicioControles();
-        iniciaEntorno();
-        inicioTempo();
+        //iniciaEntorno();
+        //inicioTempo();
     //}
-
 
     //final
     //inicioFIN();
 
-}
 
 //visor__main.addEventListener("click",iniciaEntorno)
-document.addEventListener("DOMContentLoaded",inicioJuego)
+document.addEventListener("DOMContentLoaded",inicioIntro)
+botonInicio.addEventListener("click",iniciaEntorno);
