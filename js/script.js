@@ -28,31 +28,31 @@ function actualizarEntorno(posAnt = null,posPost = null) {
   /*let main__frascos = document.createElement("DIV");
   main__frascos.style.display="flex";*/
   function editarEntorno(posAnt,posPost){
-    debugger
+    
     const main__frascos=document.getElementById("main__frascos");
     
     console.log(main__frascos.children[posAnt].firstChild);
 
-    while(main__frascos.children[posAnt].hasChildNodes){
+    while(main__frascos.children[posAnt].children.length>0){
       main__frascos.children[posAnt].removeChild(main__frascos.children[posAnt].firstChild);
     }
     
-    while(main__frascos.children[posPost].hasChildNodes){
+    while(main__frascos.children[posPost].children.length>0){
       main__frascos.children[posPost].removeChild(main__frascos.children[posPost].firstChild);
     }
-
+    
     for (let index = 0; index < arrayFrascos[posAnt].length; index++) {
       let bola = document.createElement("DIV");
       bola.classList.add("pixel-ball");
-      bola.classList.add("color" + arrayFrascos[index][index2]);
+      bola.classList.add("color" + arrayFrascos[posAnt][index]);
       main__frascos.children[posAnt].append(bola);
     }
-
+    //debugger
     for (let index = 0; index < arrayFrascos[posPost].length; index++) {
       let bola = document.createElement("DIV");
       bola.classList.add("pixel-ball");
-      bola.classList.add("color" + arrayFrascos[index][index2]);
-      main__frascos.children[posAnt].append(bola);
+      bola.classList.add("color" + arrayFrascos[posPost][index]);
+      main__frascos.children[posPost].append(bola);
     }
     
   }
@@ -196,6 +196,7 @@ const inicioIntro = () => {
 };
 
 const accionFrasco = (e) => {
+  debugger;
   console.log(click)
   let posicionMeter;
   console.log(e.target.parentNode.id.slice(6))
@@ -211,10 +212,13 @@ const accionFrasco = (e) => {
 
     if (arrayFrascos[posicionMeter].length<MAXbolas) {
       arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].pop());
+      actualizarEntorno(posAnterior,posicionMeter);    }
+    else{
+      e.target.parentNode.firstChild.style.top="0";
     }
 
     click=true;
-    actualizarEntorno(posAnterior,posicionMeter);
+
   }
   //ganar();
 }
