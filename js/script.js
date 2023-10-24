@@ -2,7 +2,7 @@ let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
 let MAXniveles = 3;
-let MAXfrascos = 6;
+let MAXfrascos = 5;
 let MAXbolas = 7;
 let segundosIniciales = 60;
 let character_1;
@@ -10,6 +10,8 @@ let pagina = 0;
 
 let arrayFrascos = [];
 let bolasFrascos = [];
+//let bolaCambio;
+let click=true;
 
 let FIN = false;
 
@@ -20,26 +22,23 @@ let FIN = false;
     audio.play();
 }*/
 
-//tiene que haber maxbolas de cada color
-const iniciaEntorno = (e) => {
-  //inicioTempo();
-  character_1 = visor__main.children[2];
-  character_1.style.display = "none";
+function actualizarEntorno(posAnt = null,posPost = null) {
 
-  tableroRand();
-  actualizarEntorno();
-  inicioTempo();
+  /*let main__frascos = document.createElement("DIV");
+  main__frascos.style.display="flex";*/
 
-  function actualizarEntorno() {
-
-    debugger
-
-
+  function generarEntorno() {
     let frascos = document.createDocumentFragment();
     for (let index = 0; index < arrayFrascos.length; index++) {
       let frasco = document.createElement("DIV");
       frasco.classList.add("visor__frasco");
+      //debugger
+      frasco.id = "frasco" + index;
       let bolas = document.createDocumentFragment();
+
+      //Añado un listener a cada frasco
+      frasco.addEventListener("click", accionFrasco);
+
 
       for (let index2 = 0; index2 < arrayFrascos[index].length; index2++) {
         let bola = document.createElement("DIV");
@@ -49,12 +48,34 @@ const iniciaEntorno = (e) => {
       }
       frasco.append(bolas);
       frascos.append(frasco);
+      /*main__frascos.append(frascos);
+      visor__main.append(main__frascos);*/
       visor__main.append(frascos);
     }
   }
 
+  if (posAnt === null && posPost === null) {
+
+  }
+  else{
+    generarEntorno();
+  }
+
+
+}
+
+const iniciaEntorno = (e) => {
+  //inicioTempo();
+  character_1 = visor__main.children[2];
+  character_1.style.display = "none";
+
+  tableroRand();
+  actualizarEntorno();
+  inicioTempo();
+
+
+
   function tableroRand() {
-    debugger
     //Siempre dejo dos frascos vacíos para poder jugar
     for (let index = 0; index < MAXfrascos; index++) {
       bolasFrascos = [];
@@ -138,6 +159,34 @@ const inicioIntro = () => {
   pagina++;
 };
 
+const accionFrasco = (e) => {
+  console.log(click)
+  //debugger
+  let posAnterior;
+  let posicionMeter;
+  console.log(e.target.parentNode.id.slice(6))
+  if (click) {
+    console.log("sacar");
+    //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
+    posAnterior = parseInt(e.target.parentNode.id.slice(6));
+    e.target.parentNode.firstChild.style.top="-75px";
+    click=false
+  }
+  else{
+    posicionMeter=parseInt(e.target.id.slice(6));
+    console.log("meter");
+    console.log(posicionMeter)
+    console.log("bola que meto " + arrayFrascos[posAnterior][arrayFrascos[posAnterior].length - 1]);
+
+    if (arrayFrascos[posicionMeter].length<MAXbolas) {
+      arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].pop());
+    }
+
+    click=true;
+    actualizarEntorno(posAnterior,posicionMeter);
+  }
+}
+
 //audioFondo(); audio
 //inicioIntro();  //intro
 
@@ -154,4 +203,5 @@ const inicioIntro = () => {
 //visor__main.addEventListener("click",iniciaEntorno)
 document.addEventListener("DOMContentLoaded", inicioIntro);
 botonInicio.addEventListener("click", iniciaEntorno);
+
 
