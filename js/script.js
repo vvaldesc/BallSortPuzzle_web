@@ -7,6 +7,7 @@ let MAXbolas = 7;
 let segundosIniciales = 60;
 let character_1;
 let pagina = 0;
+let posAnterior;
 
 let arrayFrascos = [];
 let bolasFrascos = [];
@@ -26,8 +27,44 @@ function actualizarEntorno(posAnt = null,posPost = null) {
 
   /*let main__frascos = document.createElement("DIV");
   main__frascos.style.display="flex";*/
+  function editarEntorno(posAnt,posPost){
+    debugger
+    const main__frascos=document.getElementById("main__frascos");
+    
+    console.log(main__frascos.children[posAnt].firstChild);
+
+    while(main__frascos.children[posAnt].hasChildNodes){
+      main__frascos.children[posAnt].removeChild(main__frascos.children[posAnt].firstChild);
+    }
+    
+    while(main__frascos.children[posPost].hasChildNodes){
+      main__frascos.children[posPost].removeChild(main__frascos.children[posPost].firstChild);
+    }
+
+    for (let index = 0; index < arrayFrascos[posAnt].length; index++) {
+      let bola = document.createElement("DIV");
+      bola.classList.add("pixel-ball");
+      bola.classList.add("color" + arrayFrascos[index][index2]);
+      main__frascos.children[posAnt].append(bola);
+    }
+
+    for (let index = 0; index < arrayFrascos[posPost].length; index++) {
+      let bola = document.createElement("DIV");
+      bola.classList.add("pixel-ball");
+      bola.classList.add("color" + arrayFrascos[index][index2]);
+      main__frascos.children[posAnt].append(bola);
+    }
+    
+  }
 
   function generarEntorno() {
+
+    let main__frascos = document.createElement("DIV");
+    main__frascos.style.display="flex";
+    main__frascos.style.justifyContent="center";
+    main__frascos.id="main__frascos";
+
+
     let frascos = document.createDocumentFragment();
     for (let index = 0; index < arrayFrascos.length; index++) {
       let frasco = document.createElement("DIV");
@@ -39,7 +76,6 @@ function actualizarEntorno(posAnt = null,posPost = null) {
       //Añado un listener a cada frasco
       frasco.addEventListener("click", accionFrasco);
 
-
       for (let index2 = 0; index2 < arrayFrascos[index].length; index2++) {
         let bola = document.createElement("DIV");
         bola.classList.add("pixel-ball");
@@ -48,17 +84,17 @@ function actualizarEntorno(posAnt = null,posPost = null) {
       }
       frasco.append(bolas);
       frascos.append(frasco);
-      /*main__frascos.append(frascos);
-      visor__main.append(main__frascos);*/
-      visor__main.append(frascos);
+      main__frascos.append(frascos);
+      visor__main.append(main__frascos);
+      //visor__main.append(frascos);
     }
   }
 
   if (posAnt === null && posPost === null) {
-
+    generarEntorno();
   }
   else{
-    generarEntorno();
+    editarEntorno(posAnt,posPost);
   }
 
 
@@ -75,7 +111,7 @@ const iniciaEntorno = (e) => {
 
 
 
-  function tableroRand() {
+function tableroRand() {
     //Siempre dejo dos frascos vacíos para poder jugar
     for (let index = 0; index < MAXfrascos; index++) {
       bolasFrascos = [];
@@ -161,8 +197,6 @@ const inicioIntro = () => {
 
 const accionFrasco = (e) => {
   console.log(click)
-  //debugger
-  let posAnterior;
   let posicionMeter;
   console.log(e.target.parentNode.id.slice(6))
   if (click) {
@@ -174,9 +208,6 @@ const accionFrasco = (e) => {
   }
   else{
     posicionMeter=parseInt(e.target.id.slice(6));
-    console.log("meter");
-    console.log(posicionMeter)
-    console.log("bola que meto " + arrayFrascos[posAnterior][arrayFrascos[posAnterior].length - 1]);
 
     if (arrayFrascos[posicionMeter].length<MAXbolas) {
       arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].pop());
@@ -185,6 +216,7 @@ const accionFrasco = (e) => {
     click=true;
     actualizarEntorno(posAnterior,posicionMeter);
   }
+  //ganar();
 }
 
 //audioFondo(); audio
