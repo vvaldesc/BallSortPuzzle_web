@@ -190,8 +190,34 @@ const inicioIntro = () => {
   pagina++;
 };
 
-const accionFrasco = (e) => {
+const ganar = () => {
   debugger;
+  let ganado = true;
+  let contadorLlenas = 0;
+
+  for (let index = 0; index < arrayFrascos.length; index++) {
+    if (arrayFrascos[index].length == MAXbolas) {
+      contadorLlenas++;
+      let index2 = 1;
+      let bolaComprobar = arrayFrascos[index][0];
+      while (ganado && index2 < arrayFrascos[index].length) {
+        if (bolaComprobar != arrayFrascos[index][index2]) {
+          ganado = false;
+        }
+        index2++;
+      }
+    }
+
+    index++;
+  }
+  if (contadorLlenas != MAXfrascos - 2) {
+    ganado = false;
+  }
+  console.log("ganar" + ganado);
+};
+
+const accionFrasco = (e) => {
+  //debugger;
   if (e.target.nodeName === "DIV") {
     console.log(e.target.id);
     if (e.target.classList[0].startsWith("pixel")) {
@@ -203,12 +229,12 @@ const accionFrasco = (e) => {
         posicionMeter = parseInt(e.target.parentNode.id.slice(6));
         console.log("posicionMeter: " + posicionMeter);
 
-        let valorTop1=arrayFrascos[posAnterior][0];
-        let valorTop2=arrayFrascos[posicionMeter][0];
-        console.log("valores"+valorTop1+valorTop2);
+        let valorTop1 = arrayFrascos[posAnterior][0];
+        let valorTop2 = arrayFrascos[posicionMeter][0];
+        console.log("valores" + valorTop1 + valorTop2);
 
-        if (arrayFrascos[posicionMeter].length>0) {
-          if (posAnterior == posicionMeter || valorTop1==valorTop2) {
+        if (arrayFrascos[posicionMeter].length > 0) {
+          if (posAnterior == posicionMeter || valorTop1 == valorTop2) {
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -233,6 +259,7 @@ const accionFrasco = (e) => {
         main__frascos.children[posicionMeter].firstChild.style.top="0px";
         click=true;
       }*/
+        ganar();
       }
     }
 
@@ -250,12 +277,12 @@ const accionFrasco = (e) => {
         posicionMeter = parseInt(e.target.id.slice(6));
         console.log("posicionMeter: " + posicionMeter);
 
-        let valorTop1=arrayFrascos[posAnterior][0];
-        let valorTop2=arrayFrascos[posicionMeter][0];
-        console.log("valores"+valorTop1+valorTop2);
+        let valorTop1 = arrayFrascos[posAnterior][0];
+        let valorTop2 = arrayFrascos[posicionMeter][0];
+        console.log("valores" + valorTop1 + valorTop2);
 
-        if (arrayFrascos[posicionMeter].length>0) {
-          if (posAnterior == posicionMeter || valorTop1==valorTop2) {
+        if (arrayFrascos[posicionMeter].length > 0) {
+          if (posAnterior == posicionMeter || valorTop1 == valorTop2) {
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -280,10 +307,10 @@ const accionFrasco = (e) => {
 
           click = true;
         }
+        ganar();
       }
     }
   }
-  ganar();
 };
 
 //audioFondo(); audio
