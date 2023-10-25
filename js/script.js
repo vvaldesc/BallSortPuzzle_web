@@ -12,7 +12,7 @@ let posAnterior;
 let arrayFrascos = [];
 let bolasFrascos = [];
 //let bolaCambio;
-let click=true;
+let click = true;
 
 let FIN = false;
 
@@ -23,24 +23,20 @@ let FIN = false;
     audio.play();
 }*/
 
-function actualizarEntorno(posAnt = null,posPost = null) {
-
+function actualizarEntorno(posAnt = null, posPost = null) {
   /*let main__frascos = document.createElement("DIV");
   main__frascos.style.display="flex";*/
 
   //PODRIA MAEJORARLO, QUE EN VEZ DE ACTUALIZAR DOS FRASCOS ACTUALIZO SOLO LA BOLA, Y BORRO LA BOLA
-  function editarEntorno(posAnt,posPost){
-    
-    const main__frascos=document.getElementById("main__frascos");
-    
-    while(main__frascos.children[posAnt].children.length>0){
-      main__frascos.children[posAnt].removeChild(main__frascos.children[posAnt].firstChild);
+  function editarEntorno(posAnt, posPost) {
+    const main__frascos = document.getElementById("main__frascos");
+
+    while (main__frascos.children[posAnt].children.length > 0) {
+      main__frascos.children[posAnt].removeChild(
+        main__frascos.children[posAnt].firstChild
+      );
     }
-    
-    while(main__frascos.children[posPost].children.length>0){
-      main__frascos.children[posPost].removeChild(main__frascos.children[posPost].firstChild);
-    }
-    
+
     for (let index = 0; index < arrayFrascos[posAnt].length; index++) {
       let bola = document.createElement("DIV");
       bola.classList.add("pixel-ball");
@@ -48,22 +44,28 @@ function actualizarEntorno(posAnt = null,posPost = null) {
       main__frascos.children[posAnt].append(bola);
     }
     //debugger
-    for (let index = 0; index < arrayFrascos[posPost].length; index++) {
-      let bola = document.createElement("DIV");
-      bola.classList.add("pixel-ball");
-      bola.classList.add("color" + arrayFrascos[posPost][index]);
-      main__frascos.children[posPost].append(bola);
+
+    if (posAnt != posPost) {
+      while (main__frascos.children[posPost].children.length > 0) {
+        main__frascos.children[posPost].removeChild(
+          main__frascos.children[posPost].firstChild
+        );
+      }
+
+      for (let index = 0; index < arrayFrascos[posPost].length; index++) {
+        let bola = document.createElement("DIV");
+        bola.classList.add("pixel-ball");
+        bola.classList.add("color" + arrayFrascos[posPost][index]);
+        main__frascos.children[posPost].append(bola);
+      }
     }
-    
   }
 
   function generarEntorno() {
-
     let main__frascos = document.createElement("DIV");
-    main__frascos.style.display="flex";
-    main__frascos.style.justifyContent="center";
-    main__frascos.id="main__frascos";
-
+    main__frascos.style.display = "flex";
+    main__frascos.style.justifyContent = "center";
+    main__frascos.id = "main__frascos";
 
     let frascos = document.createDocumentFragment();
     for (let index = 0; index < arrayFrascos.length; index++) {
@@ -92,12 +94,9 @@ function actualizarEntorno(posAnt = null,posPost = null) {
 
   if (posAnt === null && posPost === null) {
     generarEntorno();
+  } else {
+    editarEntorno(posAnt, posPost);
   }
-  else{
-    editarEntorno(posAnt,posPost);
-  }
-
-
 }
 
 const iniciaEntorno = (e) => {
@@ -109,9 +108,7 @@ const iniciaEntorno = (e) => {
   actualizarEntorno();
   inicioTempo();
 
-
-
-function tableroRand() {
+  function tableroRand() {
     //Siempre dejo dos frascos vacíos para poder jugar
     for (let index = 0; index < MAXfrascos; index++) {
       bolasFrascos = [];
@@ -123,18 +120,16 @@ function tableroRand() {
       }
     }
 
-
     for (let index = 0; index < 200; index++) {
+      const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
+      const randomBola1 = Math.floor(Math.random() * MAXbolas);
+      const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
+      const randomBola2 = Math.floor(Math.random() * MAXbolas);
 
-        const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
-        const randomBola1 = Math.floor(Math.random() * MAXbolas);
-        const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
-        const randomBola2 = Math.floor(Math.random() * MAXbolas);
-      
-        let aux = arrayFrascos[randomFrasco1][randomBola1];
-        arrayFrascos[randomFrasco1][randomBola1] = arrayFrascos[randomFrasco2][randomBola2];
-        arrayFrascos[randomFrasco2][randomBola2] = aux;
-
+      let aux = arrayFrascos[randomFrasco1][randomBola1];
+      arrayFrascos[randomFrasco1][randomBola1] =
+        arrayFrascos[randomFrasco2][randomBola2];
+      arrayFrascos[randomFrasco2][randomBola2] = aux;
     }
   }
 };
@@ -196,53 +191,100 @@ const inicioIntro = () => {
 };
 
 const accionFrasco = (e) => {
-  //debugger;
+  debugger;
+  if (e.target.nodeName === "DIV") {
+    console.log(e.target.id);
+    if (e.target.classList[0].startsWith("pixel")) {
+      if (click) {
+        posAnterior = parseInt(e.target.parentNode.id.slice(6));
+        e.target.parentNode.firstChild.style.top = "-75px";
+        click = false;
+      } else {
+        posicionMeter = parseInt(e.target.parentNode.id.slice(6));
+        console.log("posicionMeter: " + posicionMeter);
 
-console.log(e.target.id)
+        let valorTop1=arrayFrascos[posAnterior][0];
+        let valorTop2=arrayFrascos[posicionMeter][0];
+        console.log("valores"+valorTop1+valorTop2);
 
-
-if (e.target.nodeName==="DIV") {
-  if (e.target.id.startsWith("frasco")) {
-    
-
-  console.log(click)
-  let posicionMeter;
-  console.log(e.target.id.slice(6))
-  if (click) {
-    console.log("sacar");
-    //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
-    posAnterior = parseInt(e.target.id.slice(6));
-    e.target.firstChild.style.top="-75px";
-    click=false
-  }
-  else{
-    posicionMeter=parseInt(e.target.id.slice(6));
-    console.log("posicionMeter: "+posicionMeter)
-    if (posicionMeter >= 0 && posicionMeter < arrayFrascos.length) {
-      if (arrayFrascos[posicionMeter].length<MAXbolas) {
-        arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].shift());
-        actualizarEntorno(posAnterior,posicionMeter);
+        if (arrayFrascos[posicionMeter].length>0) {
+          if (posAnterior == posicionMeter || valorTop1==valorTop2) {
+            actualizarEntorno(posAnterior, posicionMeter);
+            click = true;
+          }
+        }
+        if (
+          posAnterior != posicionMeter &&
+          posicionMeter >= 0 &&
+          posicionMeter < arrayFrascos.length
+        ) {
+          if (arrayFrascos[posicionMeter].length < MAXbolas) {
+            arrayFrascos[posicionMeter].unshift(
+              arrayFrascos[posAnterior].shift()
+            );
+            actualizarEntorno(posAnterior, posicionMeter);
+            click = true;
+          }
+        }
+        /*else{
+        posicionMeter=parseInt(e.target.parentNode.id.slice(6));
+        const main__frascos=document.getElementById("main__frascos");
+        console.log(main__frascos)
+        main__frascos.children[posicionMeter].firstChild.style.top="0px";
         click=true;
+      }*/
       }
-
-    }
-    else{
-      const main__frascos=document.getElementById("main__frascos");
-      console.log(main__frascos)
-
-      click=true;
-
     }
 
+    if (e.target.id.startsWith("frasco")) {
+      console.log(click);
+      let posicionMeter;
+      console.log(e.target.id.slice(6));
+      if (click) {
+        console.log("sacar");
+        //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
+        posAnterior = parseInt(e.target.id.slice(6));
+        e.target.firstChild.style.top = "-75px";
+        click = false;
+      } else {
+        posicionMeter = parseInt(e.target.id.slice(6));
+        console.log("posicionMeter: " + posicionMeter);
 
+        let valorTop1=arrayFrascos[posAnterior][0];
+        let valorTop2=arrayFrascos[posicionMeter][0];
+        console.log("valores"+valorTop1+valorTop2);
 
+        if (arrayFrascos[posicionMeter].length>0) {
+          if (posAnterior == posicionMeter || valorTop1==valorTop2) {
+            actualizarEntorno(posAnterior, posicionMeter);
+            click = true;
+          }
+        }
+
+        if (
+          posAnterior != posicionMeter &&
+          posicionMeter >= 0 &&
+          posicionMeter < arrayFrascos.length
+        ) {
+          if (arrayFrascos[posicionMeter].length < MAXbolas) {
+            arrayFrascos[posicionMeter].unshift(
+              arrayFrascos[posAnterior].shift()
+            );
+
+            actualizarEntorno(posAnterior, posicionMeter);
+            click = true;
+          }
+        } else {
+          const main__frascos = document.getElementById("main__frascos");
+          console.log(main__frascos);
+
+          click = true;
+        }
+      }
+    }
   }
-    //ganar();
-  }
-}
-
-
-}
+  ganar();
+};
 
 //audioFondo(); audio
 //inicioIntro();  //intro
@@ -260,5 +302,3 @@ if (e.target.nodeName==="DIV") {
 //visor__main.addEventListener("click",iniciaEntorno)
 document.addEventListener("DOMContentLoaded", inicioIntro);
 botonInicio.addEventListener("click", iniciaEntorno);
-
-
