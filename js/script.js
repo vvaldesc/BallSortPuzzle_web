@@ -1,6 +1,7 @@
 let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
+let nivel=0;
 let MAXniveles = 3;
 let MAXfrascos = 4;
 let MAXbolas = 3;
@@ -8,6 +9,7 @@ let segundosIniciales = 60;
 let character_1;
 let pagina = 0;
 let posAnterior;
+let tiempo=40;
 
 let arrayFrascos = [];
 let bolasFrascos = [];
@@ -27,6 +29,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
   /*let main__frascos = document.createElement("DIV");
   main__frascos.style.display="flex";*/
 
+  //ESTAS FUNCIONES SERÁN EDITADAS SI CAMBIO EL ENTORNO GRÁFICO Y USO IMÁGENES
   //PODRIA MAEJORARLO, QUE EN VEZ DE ACTUALIZAR DOS FRASCOS ACTUALIZO SOLO LA BOLA, Y BORRO LA BOLA
   function editarEntorno(posAnt, posPost) {
     const main__frascos = document.getElementById("main__frascos");
@@ -135,7 +138,6 @@ const iniciaEntorno = (e) => {
 };
 
 const inicioTempo = () => {
-  let tiempo = 60;
 
   let minutos = Math.floor(tiempo / 60).toString();
   let segundos = Math.floor(tiempo % 60).toString();
@@ -151,8 +153,12 @@ const inicioTempo = () => {
       minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
 
     if (tiempo == 0) {
+      debugger;
       clearInterval(intervalo);
-      FIN = true;
+      tiempo=0;
+      borraEntorno();
+      //inicioFIN();
+
     }
   }, 1000);
 };
@@ -215,12 +221,19 @@ const ganar = () => {
   //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
   //Solo hay tres niveles
 if (ganado) {
+  debugger;
   MAXbolas++;
   MAXfrascos++;
   arrayFrascos = [];
   bolasFrascos = [];
   borraEntorno();
   iniciaEntorno();
+  nivel++;
+  tiempo=50;
+}
+else if(nivel==MAXniveles){
+  console.log("Has ganado el juego")
+  //inicioFin();
 }
 
 
