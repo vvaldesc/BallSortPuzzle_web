@@ -27,12 +27,12 @@ function actualizarEntorno(posAnt = null,posPost = null) {
 
   /*let main__frascos = document.createElement("DIV");
   main__frascos.style.display="flex";*/
+
+  //PODRIA MAEJORARLO, QUE EN VEZ DE ACTUALIZAR DOS FRASCOS ACTUALIZO SOLO LA BOLA, Y BORRO LA BOLA
   function editarEntorno(posAnt,posPost){
     
     const main__frascos=document.getElementById("main__frascos");
     
-    console.log(main__frascos.children[posAnt].firstChild);
-
     while(main__frascos.children[posAnt].children.length>0){
       main__frascos.children[posAnt].removeChild(main__frascos.children[posAnt].firstChild);
     }
@@ -196,34 +196,49 @@ const inicioIntro = () => {
 };
 
 const accionFrasco = (e) => {
+  //debugger;
+
+console.log(e.target.id)
+
 
 if (e.target.nodeName==="DIV") {
-  debugger;
+  if (e.target.id.startsWith("frasco")) {
+    
+
   console.log(click)
   let posicionMeter;
-  console.log(e.target.parentNode.id.slice(6))
+  console.log(e.target.id.slice(6))
   if (click) {
     console.log("sacar");
     //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
-    posAnterior = parseInt(e.target.parentNode.id.slice(6));
-    e.target.parentNode.firstChild.style.top="-75px";
+    posAnterior = parseInt(e.target.id.slice(6));
+    e.target.firstChild.style.top="-75px";
     click=false
   }
   else{
     posicionMeter=parseInt(e.target.id.slice(6));
+    console.log("posicionMeter: "+posicionMeter)
+    if (posicionMeter >= 0 && posicionMeter < arrayFrascos.length) {
+      if (arrayFrascos[posicionMeter].length<MAXbolas) {
+        arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].shift());
+        actualizarEntorno(posAnterior,posicionMeter);
+        click=true;
+      }
 
-    if (arrayFrascos[posicionMeter].length<MAXbolas) {
-      arrayFrascos[posicionMeter].push(arrayFrascos[posAnterior].pop());
-      actualizarEntorno(posAnterior,posicionMeter);    }
+    }
     else{
-      e.target.parentNode.firstChild.style.top="0";
+      const main__frascos=document.getElementById("main__frascos");
+      console.log(main__frascos)
+
+      click=true;
+
     }
 
-    click=true;
+
 
   }
     //ganar();
-
+  }
 }
 
 
