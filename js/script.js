@@ -1,7 +1,7 @@
 let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
-let nivel=0;
+let nivel = 0;
 let MAXniveles = 3;
 let MAXfrascos = 4;
 let MAXbolas = 3;
@@ -9,7 +9,7 @@ let segundosIniciales = 60;
 let character_1;
 let pagina = 0;
 let posAnterior;
-let tiempo=40;
+let tiempo = 40;
 
 let arrayFrascos = [];
 let bolasFrascos = [];
@@ -103,6 +103,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = (e) => {
+  debugger
   //inicioTempo();
   character_1 = visor__main.children[2];
   character_1.style.display = "none";
@@ -138,7 +139,6 @@ const iniciaEntorno = (e) => {
 };
 
 const inicioTempo = () => {
-
   let minutos = Math.floor(tiempo / 60).toString();
   let segundos = Math.floor(tiempo % 60).toString();
   visor__main.previousElementSibling.children[1].textContent =
@@ -155,10 +155,9 @@ const inicioTempo = () => {
     if (tiempo == 0) {
       debugger;
       clearInterval(intervalo);
-      tiempo=0;
+      tiempo = 0;
       borraEntorno();
       //inicioFIN();
-
     }
   }, 1000);
 };
@@ -220,29 +219,26 @@ const ganar = () => {
 
   //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
   //Solo hay tres niveles
-if (ganado) {
-  debugger;
-  MAXbolas++;
-  MAXfrascos++;
-  arrayFrascos = [];
-  bolasFrascos = [];
-  borraEntorno();
-  iniciaEntorno();
-  nivel++;
-  tiempo=50;
-}
-else if(nivel==MAXniveles){
-  console.log("Has ganado el juego")
-  //inicioFin();
-}
-
-
+  if (ganado) {
+    debugger;
+    MAXbolas++;
+    MAXfrascos++;
+    arrayFrascos = [];
+    bolasFrascos = [];
+    borraEntorno();
+    iniciaEntorno();
+    nivel++;
+    tiempo = 50;
+  } else if (nivel == MAXniveles) {
+    console.log("Has ganado el juego");
+    //inicioFin();
+  }
 };
 
 const borraEntorno = () => {
   const main__frascos = document.getElementById("main__frascos");
   main__frascos.remove();
-}
+};
 
 const accionFrasco = (e) => {
   debugger;
@@ -267,7 +263,8 @@ const accionFrasco = (e) => {
             click = true;
           }
         }
-        if (!click &&
+        if (
+          !click &&
           posAnterior != posicionMeter &&
           posicionMeter >= 0 &&
           posicionMeter < arrayFrascos.length
@@ -316,7 +313,8 @@ const accionFrasco = (e) => {
           }
         }
 
-        if (!click &&
+        if (
+          !click &&
           posAnterior != posicionMeter &&
           posicionMeter >= 0 &&
           posicionMeter < arrayFrascos.length

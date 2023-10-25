@@ -38,11 +38,14 @@
 
 .main__boton{
     height: 120px;
-    width: 160px;
-    border: 1px solid red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 400px;
 }
 
 .a__boton{
-    width: 20px;
-    height: 20px;
+    width: 120px;
+    height: 100px;
 }
