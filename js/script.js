@@ -68,6 +68,8 @@ function actualizarEntorno(posAnt = null, posPost = null) {
     let main__frascos = document.createElement("DIV");
     main__frascos.style.display = "flex";
     main__frascos.style.justifyContent = "center";
+    main__frascos.style.position="relative";
+    main__frascos.style.top = "70px";
     main__frascos.id = "main__frascos";
 
     let frascos = document.createDocumentFragment();
@@ -103,10 +105,13 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = (e) => {
-  debugger
+  //debugger
   //inicioTempo();
-  character_1 = visor__main.children[2];
-  character_1.style.display = "none";
+  character_1 = visor__main.children[1];
+  character_1.remove();
+  let main__section=document.getElementById("main__section");
+  main__section.remove();
+
 
   tableroRand();
   actualizarEntorno();
@@ -192,19 +197,7 @@ const inicioIntro = () => {
 
   //hablaPersonaje();
 
-  main__section=document.createElement("SECTION");
-  section__a=document.createElement("A")
-  a__img=document.createElement("IMG")
-
-  main__section.classList.add("main__boton")
-  a__img.classList.add("a__boton")
-  a__img.src="assets/png/—Pngtree—start button in pixel art_7949383 (1).png";
-  section__a.href="#";
-  a__img.alt="Imagen_start"
-
-  main__section.append(section__a);
-  section__a.append(a__img);
-  visor__main.appendChild(main__section)
+  creaBotonStart();
   section__a.addEventListener("click", iniciaEntorno);
 
 
@@ -370,3 +363,22 @@ const accionFrasco = (e) => {
 
 //visor__main.addEventListener("click",iniciaEntorno)
 document.addEventListener("DOMContentLoaded", inicioIntro);
+
+
+function creaBotonStart() {
+  main__section = document.createElement("SECTION");
+  section__a = document.createElement("A");
+  a__img = document.createElement("IMG");
+
+  main__section.classList.add("main__boton");
+  main__section.id="main__section";
+  a__img.classList.add("a__boton");
+  a__img.src = "assets/png/—Pngtree—start button in pixel art_7949383 (1).png";
+  section__a.href = "#";
+  a__img.alt = "Imagen_start";
+
+  main__section.append(section__a);
+  section__a.append(a__img);
+  visor__main.appendChild(main__section);
+}
+
