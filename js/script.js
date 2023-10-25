@@ -33,7 +33,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 
     while (main__frascos.children[posAnt].children.length > 0) {
       main__frascos.children[posAnt].removeChild(
-        main__frascos.children[posAnt].firstChild;
+        main__frascos.children[posAnt].firstChild
       );
     }
 
@@ -191,7 +191,6 @@ const inicioIntro = () => {
 };
 
 const ganar = () => {
-  debugger;
   let ganado = true;
   let contadorLlenas = 0;
 
@@ -207,8 +206,6 @@ const ganar = () => {
         index2++;
       }
     }
-
-    index++;
   }
   if (contadorLlenas != MAXfrascos - 2) {
     ganado = false;
@@ -218,14 +215,21 @@ const ganar = () => {
   //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
   //Solo hay tres niveles
 if (ganado) {
+  MAXbolas++;
+  MAXfrascos++;
   arrayFrascos = [];
   bolasFrascos = [];
+  borraEntorno();
   iniciaEntorno();
-  actualizarEntorno();
 }
 
 
 };
+
+const borraEntorno = () => {
+  const main__frascos = document.getElementById("main__frascos");
+  main__frascos.remove();
+}
 
 const accionFrasco = (e) => {
   //debugger;
