@@ -2,8 +2,8 @@ let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
 let MAXniveles = 3;
-let MAXfrascos = 5;
-let MAXbolas = 7;
+let MAXfrascos = 4;
+let MAXbolas = 3;
 let segundosIniciales = 60;
 let character_1;
 let pagina = 0;
@@ -33,7 +33,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 
     while (main__frascos.children[posAnt].children.length > 0) {
       main__frascos.children[posAnt].removeChild(
-        main__frascos.children[posAnt].firstChild
+        main__frascos.children[posAnt].firstChild;
       );
     }
 
@@ -214,6 +214,17 @@ const ganar = () => {
     ganado = false;
   }
   console.log("ganar" + ganado);
+
+  //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
+  //Solo hay tres niveles
+if (ganado) {
+  arrayFrascos = [];
+  bolasFrascos = [];
+  iniciaEntorno();
+  actualizarEntorno();
+}
+
+
 };
 
 const accionFrasco = (e) => {
