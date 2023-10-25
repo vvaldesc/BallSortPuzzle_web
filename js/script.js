@@ -4,7 +4,7 @@ let botonInicio = visor__main.children[1];
 let nivel = 0;
 let MAXniveles = 3;
 let MAXfrascos = 4;
-let MAXbolas = 3;
+let MAXbolas = 4;
 let segundosIniciales = 60;
 let character_1;
 let pagina = 0;
@@ -111,7 +111,6 @@ const iniciaEntorno = (e) => {
   character_1.remove();
   let main__section=document.getElementById("main__section");
   main__section.remove();
-
 
   tableroRand();
   actualizarEntorno();
