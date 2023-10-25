@@ -4,7 +4,6 @@
     background-size: cover;
     background-repeat: repeat-y;
     z-index: 0;
-    border: 1px solid red;
 }
 
 .container__nubes--1{
@@ -35,14 +34,15 @@
     width: 100%;
     height: 100%;
     position: relative;
-    border: 1px solid blue;
 }
 
 .main__boton{
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    border: 5px solid red;
-    top: 400px;
-    left: 600px;
+    height: 120px;
+    width: 160px;
+    border: 1px solid red;
+}
+
+.a__boton{
+    width: 20px;
+    height: 20px;
 }

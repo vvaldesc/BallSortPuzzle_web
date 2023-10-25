@@ -245,7 +245,7 @@ const borraEntorno = () => {
 }
 
 const accionFrasco = (e) => {
-  //debugger;
+  debugger;
   if (e.target.nodeName === "DIV") {
     console.log(e.target.id);
     if (e.target.classList[0].startsWith("pixel")) {
@@ -262,12 +262,12 @@ const accionFrasco = (e) => {
         console.log("valores" + valorTop1 + valorTop2);
 
         if (arrayFrascos[posicionMeter].length > 0) {
-          if (posAnterior == posicionMeter || valorTop1 == valorTop2) {
+          if (posAnterior == posicionMeter || valorTop1 != valorTop2) {
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
         }
-        if (
+        if (!click &&
           posAnterior != posicionMeter &&
           posicionMeter >= 0 &&
           posicionMeter < arrayFrascos.length
@@ -310,13 +310,13 @@ const accionFrasco = (e) => {
         console.log("valores" + valorTop1 + valorTop2);
 
         if (arrayFrascos[posicionMeter].length > 0) {
-          if (posAnterior == posicionMeter || valorTop1 == valorTop2) {
+          if (posAnterior == posicionMeter || valorTop1 != valorTop2) {
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
         }
 
-        if (
+        if (!click &&
           posAnterior != posicionMeter &&
           posicionMeter >= 0 &&
           posicionMeter < arrayFrascos.length
