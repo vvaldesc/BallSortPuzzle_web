@@ -190,7 +190,23 @@ const inicioIntro = () => {
     visor__main.append(character_1);
   }
 
-  hablaPersonaje();
+  //hablaPersonaje();
+
+  main__section=document.createElement("SECTION");
+  section__a=document.createElement("A")
+  a__img=document.createElement("IMG")
+
+  main__section.classList.add("main__boton")
+  a__img.classList.add("a__boton")
+  a__img.src="assets/png/—Pngtree—start button in pixel art_7949383 (1).png";
+  section__a.href="#";
+  a__img.alt="Imagen_start"
+
+  main__section.append(section__a);
+  section__a.append(a__img);
+  visor__main.appendChild(main__section)
+  section__a.addEventListener("click", iniciaEntorno);
+
 
   pagina++;
 };
@@ -354,4 +370,3 @@ const accionFrasco = (e) => {
 
 //visor__main.addEventListener("click",iniciaEntorno)
 document.addEventListener("DOMContentLoaded", inicioIntro);
-botonInicio.addEventListener("click", iniciaEntorno);
