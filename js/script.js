@@ -105,12 +105,16 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = (e) => {
-  //debugger
+  debugger
   //inicioTempo();
   character_1 = visor__main.children[1];
   character_1.remove();
+
   let main__section=document.getElementById("main__section");
   main__section.remove();
+
+  textoTitulo = visor__main.children[2];
+  character_1.remove();
 
   tableroRand();
   actualizarEntorno();
@@ -170,6 +174,7 @@ const inicioTempo = () => {
 };
 
 const inicioIntro = () => {
+  
   function cargaPersonaje() {
     let character_1 = document.createElement("IMG");
     character_1.style.position = "absolute";
@@ -197,13 +202,47 @@ const inicioIntro = () => {
     visor__main.append(character_1);
   }
 
+  function creaTextoIntro() {
+    debugger
+    createTextoTitulo("LAS AVENTURAS DE THEO","BallSortPuzzle");
+    setTimeout(() => {
+      visor__div__texto.remove();
+      createTextoTitulo(null,"Ayuda a Theo a encontrar los colores");
+      tituloPequeño.style.top="160px";
+      setTimeout(() => {
+        visor__div__texto.remove();
+        creaBotonStart();
+        section__a.addEventListener("click", iniciaEntorno);
+      }, 4000);
+    }, 4000);
+  }
+
+
   //hablaPersonaje();
-
-  creaBotonStart();
-  section__a.addEventListener("click", iniciaEntorno);
+  creaTextoIntro();
 
 
-  pagina++;
+
+
+function createTextoTitulo(textoGrande=null,textoPequeño=null) {
+    visor__div__texto = document.createElement("DIV");
+
+    tituloGrande = document.createElement("H1");
+    tituloGrande.textContent = textoGrande;
+    tituloGrande.classList.add("letraTituloGrande");
+
+    if (textoPequeño) {
+      tituloPequeño = document.createElement("H2");
+      tituloPequeño.textContent = textoPequeño;
+      tituloPequeño.classList.add("letraTituloPeq");
+    }
+
+    visor__div__texto.append(tituloGrande);
+    if (textoPequeño) {
+      visor__div__texto.append(tituloPequeño);
+    }
+    visor__main.append(visor__div__texto);
+}
 };
 
 const ganar = () => {

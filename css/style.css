@@ -16,18 +16,13 @@
 
 .container{
     margin: auto;
-    /*background-color: antiquewhite;*/
     display: grid;
     background-image: url("../assets/jpg/simon-sanchez-madera-tilex1.jpg");
     background-repeat: repeat;
     background-size: 370px;
 }
 
-.container__visor{
-    background-color: rgb(175, 226, 255);
-    position: relative;
-    z-index: 0;
-}
+
 
 .aside__container{
     position: relative;
