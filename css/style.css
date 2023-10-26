@@ -3,6 +3,11 @@
     
 }
 
+@font-face {
+    font-family: "pixelThaleah";
+    src: url("../assets/fount/ThaleahFat.ttf");
+}
+
 /*@font-face {
     font-family: 'Pixelify Sans', sans-serif;
     font-family: 'Playfair Display', serif;

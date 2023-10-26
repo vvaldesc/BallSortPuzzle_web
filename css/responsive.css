@@ -19,7 +19,22 @@
     grid-area: footer;
 }
 
+/*@media screen and (min-width: 600px){
 
+
+    .container{
+        width: 600px;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+        "visor"
+        "visor"
+        "visor";
+
+    }
+
+}*/
 
 
 
@@ -36,7 +51,5 @@
         "footer footer footer"
         ;
     }
-
-
-
 }
+

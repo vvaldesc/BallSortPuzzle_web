@@ -49,3 +49,9 @@
     width: 120px;
     height: 100px;
 }
+
+.letraGrande{
+    font-family: pixelThaleah;
+    font-size: 15em;
+    position: absolute;
+}

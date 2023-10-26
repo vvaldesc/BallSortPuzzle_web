@@ -116,31 +116,33 @@ const iniciaEntorno = (e) => {
   actualizarEntorno();
   inicioTempo();
 
-  function tableroRand() {
-    //Siempre dejo dos frascos vacíos para poder jugar
-    for (let index = 0; index < MAXfrascos; index++) {
-      bolasFrascos = [];
-      arrayFrascos.push(bolasFrascos);
-      if (index < MAXfrascos - 2) {
-        for (let index2 = 0; index2 < MAXbolas; index2++) {
-          bolasFrascos.push(index);
-        }
+
+};
+
+function tableroRand() {
+  //Siempre dejo dos frascos vacíos para poder jugar
+  for (let index = 0; index < MAXfrascos; index++) {
+    bolasFrascos = [];
+    arrayFrascos.push(bolasFrascos);
+    if (index < MAXfrascos - 2) {
+      for (let index2 = 0; index2 < MAXbolas; index2++) {
+        bolasFrascos.push(index);
       }
     }
-
-    for (let index = 0; index < 200; index++) {
-      const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
-      const randomBola1 = Math.floor(Math.random() * MAXbolas);
-      const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
-      const randomBola2 = Math.floor(Math.random() * MAXbolas);
-
-      let aux = arrayFrascos[randomFrasco1][randomBola1];
-      arrayFrascos[randomFrasco1][randomBola1] =
-        arrayFrascos[randomFrasco2][randomBola2];
-      arrayFrascos[randomFrasco2][randomBola2] = aux;
-    }
   }
-};
+
+  for (let index = 0; index < 200; index++) {
+    const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
+    const randomBola1 = Math.floor(Math.random() * MAXbolas);
+    const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
+    const randomBola2 = Math.floor(Math.random() * MAXbolas);
+
+    let aux = arrayFrascos[randomFrasco1][randomBola1];
+    arrayFrascos[randomFrasco1][randomBola1] =
+      arrayFrascos[randomFrasco2][randomBola2];
+    arrayFrascos[randomFrasco2][randomBola2] = aux;
+  }
+}
 
 const inicioTempo = () => {
   let minutos = Math.floor(tiempo / 60).toString();
@@ -161,7 +163,8 @@ const inicioTempo = () => {
       clearInterval(intervalo);
       tiempo = 0;
       borraEntorno();
-      //inicioFIN();
+      ganado=false;
+      inicioFIN(ganado);
     }
   }, 1000);
 };
@@ -234,12 +237,12 @@ const ganar = () => {
     arrayFrascos = [];
     bolasFrascos = [];
     borraEntorno();
-    iniciaEntorno();
+    tableroRand();
+    actualizarEntorno();
     nivel++;
     tiempo = 50;
   } else if (nivel == MAXniveles) {
-    console.log("Has ganado el juego");
-    //inicioFin();
+    inicioFin(ganado);
   }
 };
 
@@ -346,6 +349,15 @@ const accionFrasco = (e) => {
     }
   }
 };
+
+function inicioFin(ganado) {
+
+  if (ganado) {
+    console.log("Ganado");
+  }else{
+    console.log("No ganado");
+  }
+}
 
 //audioFondo(); audio
 //inicioIntro();  //intro

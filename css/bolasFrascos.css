@@ -38,6 +38,10 @@
     align-items: center;
 }
 
+.visor__frasco:hover{
+    box-shadow: 4px 4px white;
+}
+
 .pixel-ball {
     width: 40px;
     height: 40px;
