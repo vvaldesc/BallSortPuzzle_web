@@ -21,16 +21,26 @@
   </head>
   <body>
     <div id="container" class="container">
-      <header class="container__header"></header>
+      <header class="container__header">
 
-      <div id="container__visor" class="container__visor">
+        
+      </header>
+
+      <div id="container__visor" class="container__visor cieloInicial">
+        <div class="visor_bg"></div>
+
+
         <header id="visor__header" class="visor__header">
-          <img
-            class="header__tablero"
-            src="assets/png/panel__recortado.png"
-            alt="Tablero"
-          />
-          <p class="temporizador">00:00</p>
+          <div id="visorHeader__div__temporizador" class="visorHeader__div__temporizador">
+            <img
+              class="header__tablero"
+              src="assets/png/panel__recortado.png"
+              alt="Tablero"
+            />
+            <p class="temporizador">00:00</p>
+          </div>
+
+
         </header>
         <main id="visor__main" class="visor__main">
           <img

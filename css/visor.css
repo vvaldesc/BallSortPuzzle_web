@@ -1,13 +1,122 @@
-.container__visor{
-    position: relative;
+.visor_bg{
     background-image: url("../assets/png/—Pngtree—mountain\ background\ pixel\ scene_6021586.png");
     background-size: cover;
     background-repeat: repeat-y;
-    background-color: black;
-    z-index: 0;
-    /*opacity: 0;
-    animation: montanaAnim 1s;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
+
+.fondoGris1{
+    animation: fondoGris1;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+.fondoGris2{
+    animation: fondoGris2;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+.fondoGris3{
+    animation: fondoGris3;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fondoGris1 {
+    from{
+        filter: grayscale(0%);
+    }to{
+        filter: grayscale(100%);
+    }
+}
+
+@keyframes fondoGris2 {
+    from{
+        filter: grayscale(100%);
+    }to{
+        filter: grayscale(50%);
+    }
+}
+
+@keyframes fondoGris3 {
+    from{
+        filter: grayscale(50%);
+    }to{
+        filter: grayscale(0%);
+    }
+}
+
+.container__visor{
+    position: relative;
+    background-size: cover;
+    background-repeat: repeat-y;
+    z-index: 0;
+    background-color: rgb(175, 226, 255);
+}
+
+
+.cieloGris{
+    animation: cieloGris;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.cieloNaranja{
+    animation: cieloNaranja;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+.cieloAzul{
+    animation: cieloAzul;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+.cieloInicial{
+    animation: cieloInicial;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes cieloInicial {
+    from{
+        background-color: rgb(175, 226, 255);
+    }to{
+        background-color: black;
+    }
+}
+
+@keyframes cieloGris {
+    from{
+        background-color: black;
+    }to{
+        background-color: grey;
+    }
+}
+
+@keyframes cieloNaranja {
+    from{
+        background-color: grey;
+    }to{
+        background-color: rgb(115, 131, 141);
+    }
+}
+
+@keyframes cieloAzul {
+    from{
+        background-color: rgb(115, 131, 141);
+    }to{
+        background-color: rgb(175, 226, 255);
+    }
+}
+
 
 .container__nubes--1{
     position: absolute;
@@ -33,6 +142,8 @@
 
 
 
+
+/*
 @keyframes cieloAnim {
     0%{
         background-color: rgb(175, 226, 255);
@@ -47,7 +158,7 @@
         background-color: rgb(175, 226, 255);
     }
 }
-
+*/
 
 @keyframes montanaAnim {
     0%{
@@ -56,15 +167,6 @@
     80% {
         opacity: 1;
     }
-}
-
-.container__visor{
-    background-color: rgb(175, 226, 255);
-    /*background-color: bisque;*/
-    position: relative;
-    z-index: 0;
-    animation: cieloAnim;
-    animation-duration: 16s;
 }
 
 

@@ -1,9 +1,6 @@
 let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
-
-
-
 let nivel = 0;
 let MAXniveles = 3;
 let MAXfrascos = 4;
@@ -72,7 +69,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
     main__frascos.style.display = "flex";
     main__frascos.style.justifyContent = "center";
     main__frascos.style.position="relative";
-    main__frascos.style.top = "70px";
+    main__frascos.style.top = "20px";
     main__frascos.id = "main__frascos";
 
     let frascos = document.createDocumentFragment();
@@ -119,9 +116,11 @@ const iniciaEntorno = (e) => {
   textoTitulo = visor__main.children[2];
   character_1.remove();
 
+  
   tableroRand();
   actualizarEntorno();
   inicioTempo();
+  cieloColor(nivel);
 
 
 };
@@ -152,9 +151,14 @@ function tableroRand() {
 }
 
 const inicioTempo = () => {
+
+
+  const visorHeader__div__temporizador=document.getElementById("visorHeader__div__temporizador")
+  visorHeader__div__temporizador.classList.add("temporizadorOn")
+
   let minutos = Math.floor(tiempo / 60).toString();
   let segundos = Math.floor(tiempo % 60).toString();
-  visor__main.previousElementSibling.children[1].textContent =
+  visorHeader__div__temporizador.children[1].textContent =
     minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
 
   const intervalo = setInterval(() => {
@@ -162,16 +166,14 @@ const inicioTempo = () => {
 
     let minutos = Math.floor(tiempo / 60).toString();
     let segundos = Math.floor(tiempo % 60).toString();
-    visor__main.previousElementSibling.children[1].textContent =
+    visorHeader__div__temporizador.children[1].textContent =
       minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
-
     if (tiempo == 0) {
       debugger;
       clearInterval(intervalo);
       tiempo = 0;
-      borraEntorno();
       ganado=false;
-      inicioFIN(ganado);
+      inicioFin(ganado);
     }
   }, 1000);
 };
@@ -199,14 +201,7 @@ const inicioIntro = () => {
     }
   };
 
-  if (pagina == 0) {
-    character_1 = cargaPersonaje();
-    //bocadillo = cargaBocadillo();
-    visor__main.append(character_1);
-  }
-
-  function creaTextoIntro() {
-    debugger
+  function secuenciaIntro() {
     createTextoTitulo("LAS AVENTURAS DE THEO","BallSortPuzzle");
     setTimeout(() => {
       visor__div__texto.remove();
@@ -214,6 +209,8 @@ const inicioIntro = () => {
       tituloPequeño.style.top="160px";
       setTimeout(() => {
         visor__div__texto.remove();
+        character_1=cargaPersonaje();
+        visor__main.append(character_1);
         creaBotonStart();
         section__a.addEventListener("click", iniciaEntorno);
       }, 4000);
@@ -222,31 +219,33 @@ const inicioIntro = () => {
 
 
   //hablaPersonaje();
-  creaTextoIntro();
+  secuenciaIntro();
 
 
 
+
+
+};
 
 function createTextoTitulo(textoGrande=null,textoPequeño=null) {
-    visor__div__texto = document.createElement("DIV");
+  visor__div__texto = document.createElement("DIV");
 
-    tituloGrande = document.createElement("H1");
-    tituloGrande.textContent = textoGrande;
-    tituloGrande.classList.add("letraTituloGrande");
+  tituloGrande = document.createElement("H1");
+  tituloGrande.textContent = textoGrande;
+  tituloGrande.classList.add("letraTituloGrande");
 
-    if (textoPequeño) {
-      tituloPequeño = document.createElement("H2");
-      tituloPequeño.textContent = textoPequeño;
-      tituloPequeño.classList.add("letraTituloPeq");
-    }
+  if (textoPequeño) {
+    tituloPequeño = document.createElement("H2");
+    tituloPequeño.textContent = textoPequeño;
+    tituloPequeño.classList.add("letraTituloPeq");
+  }
 
-    visor__div__texto.append(tituloGrande);
-    if (textoPequeño) {
-      visor__div__texto.append(tituloPequeño);
-    }
-    visor__main.append(visor__div__texto);
+  visor__div__texto.append(tituloGrande);
+  if (textoPequeño) {
+    visor__div__texto.append(tituloPequeño);
+  }
+  visor__main.append(visor__div__texto);
 }
-};
 
 const ganar = () => {
   let ganado = true;
@@ -282,11 +281,47 @@ const ganar = () => {
     tableroRand();
     actualizarEntorno();
     nivel++;
+    cieloColor(nivel);
     tiempo = 50;
-  } else if (nivel == MAXniveles) {
+  } else if (nivel == MAXniveles-1) {
+    arrayFrascos = [];
+    bolasFrascos = [];
+    tiempo = 0;
+    borraEntorno();
     inicioFin(ganado);
   }
 };
+
+const cieloColor = (nivel) => {
+  debugger
+  const cielo=visor__main.parentNode;
+  const bg = cielo.firstChild.nextSibling;
+  switch (nivel) {
+    case 0:
+      cielo.classList.remove("cieloInicial")
+      cielo.classList.add("cieloGris");
+
+      bg.classList.add("fondoGris1");
+    break;
+    case 1:
+      cielo.classList.remove("cieloGris");
+      cielo.classList.add("cieloNaranja");
+
+      bg.classList.remove("fondoGris1");
+      bg.classList.add("fondoGris2");
+    break;
+    case 2:
+      cielo.classList.remove("cieloNaranja");
+      cielo.classList.add("cieloAzul");
+
+      bg.classList.remove("fondoGris2");
+      bg.classList.add("fondoGris3");
+    break;
+  default:
+    break;
+  }
+
+}
 
 const borraEntorno = () => {
   const main__frascos = document.getElementById("main__frascos");
@@ -294,7 +329,6 @@ const borraEntorno = () => {
 };
 
 const accionFrasco = (e) => {
-  debugger;
   if (e.target.nodeName === "DIV") {
     console.log(e.target.id);
     if (e.target.classList[0].startsWith("pixel")) {
@@ -396,8 +430,12 @@ function inicioFin(ganado) {
 
   if (ganado) {
     console.log("Ganado");
+    borraEntorno();
+    createTextoTitulo("HAS GANADO","AYUDASTE A THEO A ENCONTRAR TODOS LOS COLORES");
   }else{
     console.log("No ganado");
+    borraEntorno();
+    createTextoTitulo("FIN","HAS PERDIDO");
   }
 }
 

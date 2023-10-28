@@ -1,22 +1,58 @@
 .visor__header{
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 130px;
+}
+
+.container__header{
+    position: relative;
+    z-index: 40;
+}
+
+.visorHeader__div__temporizador{
+    position: relative;
+    top: -130px;
+    opacity: 0;
+    z-index: 0;
 }
 
 .header__tablero{
     height: 120px;
     width: 190px;
     position: relative;
-    z-index: 15;
 }
 
 .temporizador{
-    position: absolute;
-    top: 45px;
-    z-index: 20;
+    position: relative;
+    top: -80px;
+    left: 63px;
     color: white;
     font-size: 1.5em;
     font-family: 'Pixelify Sans', sans-serif;
-    
+}
+
+.temporizadorOn {
+    animation: temporizadorOn;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes temporizadorOn {
+    from {
+        top: -130px;
+        opacity: 0;
+    }to {
+        top: 0px;
+        opacity: 100%;
+    }
+}
+
+@keyframes temporizadorOff {
+    from {
+        top: 0px;
+        opacity: 100%;
+    }to {
+        top: -130px;
+        opacity: 0;
+    }
 }
