@@ -37,11 +37,11 @@
     0%{
         background-color: rgb(175, 226, 255);
     }
-    20%{
-        background-color: black;
+    40%{
+        background-color: grey;
     }
     80% {
-        background-color: black;
+        background-color: grey;
     }
     100%{
         background-color: rgb(175, 226, 255);

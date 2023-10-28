@@ -19,37 +19,35 @@
     grid-area: footer;
 }
 
-/*@media screen and (min-width: 600px){
-
-
+@media screen and (min-width: 600px){
     .container{
-        width: 600px;
-
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        grid-template-areas: 
-        "visor"
-        "visor"
-        "visor";
-
+        transform: scale(0.1);
     }
+}
 
-}*/
-
-
+@media screen and (min-width: 1024px){
+    body{
+        transform: scale(0.5);
+    }
+    .container{
+        transform: scale(0.5);
+    }
+}
 
 @media screen and (min-width: 1200px){
     .container{
-        width: 1300px;
-
-        grid-template-columns: 1fr 8fr 1fr;
-        grid-template-rows: 100px 700px 100px;
-
-        grid-template-areas: 
-        "header header header"
-        "asidel visor asider"
-        "footer footer footer"
-        ;
+        transform: scale(0.9);
+    }
+    body{
+        transform: scale(1);
     }
 }
+
+
+
+/*@media screen and (min-width: 1200px){
+    .container{
+
+    }
+}*/
 

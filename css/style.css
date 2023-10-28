@@ -3,6 +3,12 @@
     
 }
 
+body{
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
 @font-face {
     font-family: "pixelThaleah";
     src: url("../assets/fount/ThaleahFat.ttf");
@@ -20,6 +26,20 @@
     background-image: url("../assets/jpg/simon-sanchez-madera-tilex1.jpg");
     background-repeat: repeat;
     background-size: 370px;
+
+
+    width: 1300px;
+
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 100px 700px 100px;
+
+    grid-template-areas: 
+    "header header header"
+    "asidel visor asider"
+    "footer footer footer"
+    ;
+
+
 }
 
 

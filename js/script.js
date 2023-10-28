@@ -1,6 +1,9 @@
 let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
+
+
+
 let nivel = 0;
 let MAXniveles = 3;
 let MAXfrascos = 4;
@@ -174,7 +177,7 @@ const inicioTempo = () => {
 };
 
 const inicioIntro = () => {
-  
+
   function cargaPersonaje() {
     let character_1 = document.createElement("IMG");
     character_1.style.position = "absolute";
@@ -412,7 +415,6 @@ function inicioFin(ganado) {
 //inicioFIN();
 
 //visor__main.addEventListener("click",iniciaEntorno)
-document.addEventListener("DOMContentLoaded", inicioIntro);
 
 
 function creaBotonStart() {
@@ -432,3 +434,4 @@ function creaBotonStart() {
   visor__main.appendChild(main__section);
 }
 
+document.addEventListener("DOMContentLoaded", inicioIntro);
