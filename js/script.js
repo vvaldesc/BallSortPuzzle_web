@@ -2,7 +2,7 @@ let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
 let nivel = 0;
-let MAXniveles = 3;
+let MAXniveles = 1;
 let MAXfrascos = 4;
 let MAXbolas = 4;
 let segundosIniciales = 60;
@@ -76,7 +76,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
     for (let index = 0; index < arrayFrascos.length; index++) {
       let frasco = document.createElement("DIV");
       frasco.classList.add("visor__frasco");
-      //debugger
+      //frasco.style.height=(40*MAXbolas+nivel).toString()+"px";
       frasco.id = "frasco" + index;
       let bolas = document.createDocumentFragment();
 
@@ -105,7 +105,6 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = (e) => {
-  debugger
   //inicioTempo();
   character_1 = visor__main.children[1];
   character_1.remove();
@@ -166,16 +165,19 @@ const inicioTempo = () => {
 
     let minutos = Math.floor(tiempo / 60).toString();
     let segundos = Math.floor(tiempo % 60).toString();
+
     visorHeader__div__temporizador.children[1].textContent =
       minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
+
     if (tiempo == 0) {
-      debugger;
       clearInterval(intervalo);
       tiempo = 0;
       ganado=false;
       inicioFin(ganado);
     }
-  }, 1000);
+
+  }, 100000);
+  
 };
 
 const inicioIntro = () => {
@@ -203,10 +205,14 @@ const inicioIntro = () => {
 
   function secuenciaIntro() {
     createTextoTitulo("LAS AVENTURAS DE THEO","BallSortPuzzle");
+
+    //primer timeOu
     setTimeout(() => {
       visor__div__texto.remove();
       createTextoTitulo(null,"Ayuda a Theo a encontrar los colores");
       tituloPequeño.style.top="160px";
+
+
       setTimeout(() => {
         visor__div__texto.remove();
         character_1=cargaPersonaje();
@@ -273,27 +279,37 @@ const ganar = () => {
   //Solo hay tres niveles
   if (ganado) {
     debugger;
-    MAXbolas++;
-    MAXfrascos++;
-    arrayFrascos = [];
-    bolasFrascos = [];
-    borraEntorno();
-    tableroRand();
-    actualizarEntorno();
     nivel++;
-    cieloColor(nivel);
-    tiempo = 50;
-  } else if (nivel == MAXniveles-1) {
     arrayFrascos = [];
     bolasFrascos = [];
-    tiempo = 0;
-    borraEntorno();
-    inicioFin(ganado);
+    if (nivel==MAXniveles) {
+      borraEntorno();
+      tiempo = 0;
+      cieloColor(2);
+      inicioFin(ganado);
+    } else{
+      MAXbolas++;
+      MAXfrascos++;
+      borraEntorno();
+      tableroRand();
+      actualizarEntorno();
+      nivel++;
+      cieloColor(nivel);
+      tiempo += 10 * nivel; //cada nivel aumenta 10 segundos
+    }
+
+
+
+
   }
 };
 
 const cieloColor = (nivel) => {
-  debugger
+
+  if (nivel>2) {
+    nivel=2;
+  }
+
   const cielo=visor__main.parentNode;
   const bg = cielo.firstChild.nextSibling;
   switch (nivel) {
@@ -325,7 +341,10 @@ const cieloColor = (nivel) => {
 
 const borraEntorno = () => {
   const main__frascos = document.getElementById("main__frascos");
-  main__frascos.remove();
+
+  if (main__frascos!=null) {
+    main__frascos.remove();
+  }
 };
 
 const accionFrasco = (e) => {
@@ -430,11 +449,9 @@ function inicioFin(ganado) {
 
   if (ganado) {
     console.log("Ganado");
-    borraEntorno();
     createTextoTitulo("HAS GANADO","AYUDASTE A THEO A ENCONTRAR TODOS LOS COLORES");
   }else{
     console.log("No ganado");
-    borraEntorno();
     createTextoTitulo("FIN","HAS PERDIDO");
   }
 }
@@ -449,8 +466,6 @@ function inicioFin(ganado) {
 //inicioTempo();
 //}
 
-//final
-//inicioFIN();
 
 //visor__main.addEventListener("click",iniciaEntorno)
 

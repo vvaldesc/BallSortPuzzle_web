@@ -23,7 +23,8 @@
 }
 
 
-
+/* Tengo que hacer column reverse y darle un height en js para cada nivel */
+/* 40*(4+n) px */
 .visor__frasco{
     min-height: 20px;
     width: 70px;
