@@ -148,6 +148,7 @@ const iniciaEntorno = () => {
   debugger;
   if (!audioBg.paused) {
     audioBg.pause();
+    audioBg.currentTime = 0;
   }
 
   audioBg.play();
@@ -160,7 +161,9 @@ const iniciaEntorno = () => {
   main__section.remove();
 
   textoTitulo = visor__main.querySelector("#visor__div__texto");
-  character_1.remove();
+  if (textoTitulo!=null) {
+    textoTitulo.remove();
+  }
 
   
   tableroRand();
