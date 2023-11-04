@@ -2,7 +2,7 @@ let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
 let nivel = 0;
-let MAXniveles = 3;
+let MAXniveles = 1;
 let MAXfrascos = 4;
 let MAXbolas = 4;
 let segundosIniciales = 60;
@@ -18,12 +18,50 @@ let click = true;
 
 let FIN = false;
 
-/*const audioFondo = () => {
-    //debugger
-    let audio = new Audio('./assets/audio/backgroundAudio.mp3');
-    audio.volume = 0.2;
-    audio.play();
-}*/
+const audioFondo = () => {
+    let audioFondo = new Audio('./assets/audio/musicaBackground.wav');
+    audioFondo.volume = 0.1;
+    audioFondo.loop = true;
+    return audioFondo;
+}
+
+let audioBg=audioFondo();
+
+const audioSacaBola = () => {
+  let audio = new Audio('./assets/audio/sacarBola.wav');
+  audio.volume = 0.6;
+  audio.play();
+}
+
+const audioMeterBola = () => {
+  let audio = new Audio('./assets/audio/meterBola.wav');
+  audio.volume = 0.6;
+  audio.play();
+}
+
+const audioMovimientoAtras = () => {
+  let audio = new Audio('./assets/audio/movimientoFallido.wav');
+  audio.volume = 0.4;
+  audio.play();
+}
+
+const audioLevelUp = () => {
+  let audio = new Audio('./assets/audio/lvlUp.wav');
+  audio.volume = 0.5;
+  audio.play();
+}
+
+const audioPerder = () => {
+  let audio = new Audio('./assets/audio/juegoPerdido.mp3');
+  audio.volume = 0.4;
+  audio.play();
+}
+
+const audioGanar = () => {
+  let audio = new Audio('./assets/audio/juegoGanado.wav');
+  audio.volume = 0.4;
+  audio.play();
+}
 
 function actualizarEntorno(posAnt = null, posPost = null) {
   /*let main__frascos = document.createElement("DIV");
@@ -48,7 +86,6 @@ function actualizarEntorno(posAnt = null, posPost = null) {
       bola.classList.add("color" + arrayFrascos[posAnt][index]);
       main__frascos.children[posAnt].append(bola);
     }
-    //debugger
 
     if (posAnt != posPost) {
       while (main__frascos.children[posPost].children.length > 0) {
@@ -78,7 +115,6 @@ function actualizarEntorno(posAnt = null, posPost = null) {
     for (let index = 0; index < arrayFrascos.length; index++) {
       let frasco = document.createElement("DIV");
       frasco.classList.add("visor__frasco");
-      debugger;
       frasco.style.height=(40*MAXbolas+15).toString()+"px";
       frasco.id = "frasco" + index;
       let bolas = document.createDocumentFragment();
@@ -107,15 +143,23 @@ function actualizarEntorno(posAnt = null, posPost = null) {
   }
 }
 
-const iniciaEntorno = (e) => {
+const iniciaEntorno = () => {
+
+  debugger;
+  if (!audioBg.paused) {
+    audioBg.pause();
+  }
+
+  audioBg.play();
+
   //inicioTempo();
-  character_1 = visor__main.children[1];
+  character_1 = visor__main.querySelector("#character_1");
   character_1.remove();
 
   let main__section=document.getElementById("main__section");
   main__section.remove();
 
-  textoTitulo = visor__main.children[2];
+  textoTitulo = visor__main.querySelector("#visor__div__texto");
   character_1.remove();
 
   
@@ -180,6 +224,8 @@ const inicioTempo = () => {
       clearInterval(intervalo);
       tiempo = 0;
       ganado=false;
+      audioPerder();
+      borraEntorno();
       inicioFin(ganado);
     }
 
@@ -187,20 +233,22 @@ const inicioTempo = () => {
   
 };
 
+function cargaPersonaje() {
+  let character_1 = document.createElement("IMG");
+  character_1.style.position = "absolute";
+  character_1.style.zIndex = "30";
+  character_1.style.height = "400px";
+  character_1.style.width = "400px";
+  character_1.style.left = "650px";
+  character_1.style.top = "90px";
+  character_1.id = "character_1";
+  character_1.src = "../assets/png/character_2.png";
+  return character_1;
+}
+
 const inicioIntro = () => {
 
-  function cargaPersonaje() {
-    let character_1 = document.createElement("IMG");
-    character_1.style.position = "absolute";
-    character_1.style.zIndex = "30";
-    character_1.style.height = "400px";
-    character_1.style.width = "400px";
-    character_1.style.left = "650px";
-    character_1.style.top = "90px";
-    character_1.id = "character_1";
-    character_1.src = "../assets/png/character_2.png";
-    return character_1;
-  }
+
 
   const hablaPersonaje = () => {
     for (let index = 0; index < 10; index++) {
@@ -230,18 +278,14 @@ const inicioIntro = () => {
     }, 4000);
   }
 
-
   //hablaPersonaje();
   secuenciaIntro();
-
-
-
-
 
 };
 
 function createTextoTitulo(textoGrande=null,textoPequeño=null) {
   visor__div__texto = document.createElement("DIV");
+  visor__div__texto.id="visor__div__texto";
 
   tituloGrande = document.createElement("H1");
   tituloGrande.textContent = textoGrande;
@@ -268,16 +312,17 @@ const ganar = () => {
   //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
   //Solo hay tres niveles
   if (ganado) {
-    debugger;
     nivel++;
     arrayFrascos = [];
     bolasFrascos = [];
     if (nivel==MAXniveles) {
+      audioGanar();
       borraEntorno();
       tiempo = 0;
       cieloColor(2);
       inicioFin(ganado);
     } else{
+      audioLevelUp();
       MAXbolas++;
       MAXfrascos++;
       borraEntorno();
@@ -341,8 +386,10 @@ const borraEntorno = () => {
 const accionFrasco = (e) => {
   if (e.target.nodeName === "DIV") {
     console.log(e.target.id);
+
     if (e.target.classList[0].startsWith("pixel")) {
       if (click) {
+        audioSacaBola();
         posAnterior = parseInt(e.target.parentNode.id.slice(6));
         e.target.parentNode.firstChild.style.top = "-75px";
         click = false;
@@ -356,6 +403,7 @@ const accionFrasco = (e) => {
 
         if (arrayFrascos[posicionMeter].length > 0) {
           if (posAnterior == posicionMeter || valorTop1 != valorTop2) {
+            audioMovimientoAtras();
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -370,6 +418,7 @@ const accionFrasco = (e) => {
             arrayFrascos[posicionMeter].unshift(
               arrayFrascos[posAnterior].shift()
             );
+            audioMeterBola();
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -385,12 +434,14 @@ const accionFrasco = (e) => {
       }
     }
 
+
     if (e.target.id.startsWith("frasco")) {
       console.log(click);
       let posicionMeter;
       console.log(e.target.id.slice(6));
       if (click) {
         console.log("sacar");
+        audioSacaBola();
         //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
         posAnterior = parseInt(e.target.id.slice(6));
         e.target.firstChild.style.top = "-75px";
@@ -405,6 +456,7 @@ const accionFrasco = (e) => {
 
         if (arrayFrascos[posicionMeter].length > 0) {
           if (posAnterior == posicionMeter || valorTop1 != valorTop2) {
+            audioMovimientoAtras();
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -420,7 +472,7 @@ const accionFrasco = (e) => {
             arrayFrascos[posicionMeter].unshift(
               arrayFrascos[posAnterior].shift()
             );
-
+            audioMeterBola();
             actualizarEntorno(posAnterior, posicionMeter);
             click = true;
           }
@@ -468,23 +520,34 @@ function inicioFin(ganado) {
     console.log("No ganado");
     createTextoTitulo("FIN","HAS PERDIDO");
   }
+
+  setTimeout(() => {
+    debugger;
+
+    visor__div__texto.remove();
+
+    if (ganado) {
+      createTextoTitulo("INTENTALO DE NUEVO","BATE TU RECORD!");
+    }else{
+      createTextoTitulo("INTENTALO DE NUEVO","PUEDES CONSEGUIRLO!");
+    }
+
+      debugger;
+  
+      character_1=cargaPersonaje();
+      visor__main.append(character_1);
+      creaBotonStart();
+      section__a.addEventListener("click", iniciaEntorno);
+  
+
+
+  }, 4000);
+
+
 }
 
-//audioFondo(); audio
-//inicioIntro();  //intro
-
-//Bucle niveles
-//for (let index = 0; index < MAXniveles; index++) {
-//inicioControles();
-//iniciaEntorno();
-//inicioTempo();
-//}
-
-
-//visor__main.addEventListener("click",iniciaEntorno)
-
-
 function creaBotonStart() {
+
   main__section = document.createElement("SECTION");
   section__a = document.createElement("A");
   a__img = document.createElement("IMG");
