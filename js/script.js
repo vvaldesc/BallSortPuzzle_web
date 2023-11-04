@@ -1,5 +1,4 @@
 let visor__main = document.getElementById("visor__main");
-let botonInicio = visor__main.children[1];
 
 let nivel;
 let MAXniveles;
@@ -18,14 +17,28 @@ let intervalo;
 
 let FIN = false;
 
-const audioFondo = () => {
+/*const audioFondo = () => {
     let audioFondo = new Audio('./assets/audio/musicaBackground.wav');
     audioFondo.volume = 0.1;
     audioFondo.loop = true;
     return audioFondo;
 }
 
-let audioBg=audioFondo();
+const audioBg = audioFondo();*/
+
+/*const audioBg = (() => {
+  let audioBg = new Audio('./assets/audio/musicaBackground.wav');
+  audioBg.volume = 0.1;
+  audioBg.loop = true;
+  return audioBg;
+})*/
+
+//inicializo el audio de fondo de forma global como audioBg
+let audioBg = new Audio('./assets/audio/musicaBackground.wav');
+audioBg.volume = 0.1;
+audioBg.loop = true;
+
+
 
 const audioSacaBola = () => {
   let audio = new Audio('./assets/audio/sacarBola.wav');
@@ -144,7 +157,7 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = () => {
-
+debugger
   if (!audioBg.paused) {
     audioBg.pause();
     audioBg.currentTime = 0;
@@ -171,9 +184,10 @@ const iniciaEntorno = () => {
     textoTitulo.remove();
   }
 
+  //configuración de constantes. (Son los parámetros con los que empieza el juego, van cambiando por cada nivel)
   tiempo = 40;
   nivel = 0;
-  MAXniveles = 2;
+  MAXniveles = 1;
   MAXfrascos = 4;
   MAXbolas = 4;
 
