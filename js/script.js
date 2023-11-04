@@ -2,7 +2,7 @@ let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
 let nivel = 0;
-let MAXniveles = 1;
+let MAXniveles = 3;
 let MAXfrascos = 4;
 let MAXbolas = 4;
 let segundosIniciales = 60;
@@ -33,6 +33,8 @@ function actualizarEntorno(posAnt = null, posPost = null) {
   //PODRIA MAEJORARLO, QUE EN VEZ DE ACTUALIZAR DOS FRASCOS ACTUALIZO SOLO LA BOLA, Y BORRO LA BOLA
   function editarEntorno(posAnt, posPost) {
     const main__frascos = document.getElementById("main__frascos");
+    //frasco.style.height=(40*MAXbolas+nivel).toString()+"px";
+    //frasco.style.height=(40*MAXbolas+10).toString()+"px";
 
     while (main__frascos.children[posAnt].children.length > 0) {
       main__frascos.children[posAnt].removeChild(
@@ -76,7 +78,8 @@ function actualizarEntorno(posAnt = null, posPost = null) {
     for (let index = 0; index < arrayFrascos.length; index++) {
       let frasco = document.createElement("DIV");
       frasco.classList.add("visor__frasco");
-      //frasco.style.height=(40*MAXbolas+nivel).toString()+"px";
+      debugger;
+      frasco.style.height=(40*MAXbolas+15).toString()+"px";
       frasco.id = "frasco" + index;
       let bolas = document.createDocumentFragment();
 
@@ -136,17 +139,21 @@ function tableroRand() {
     }
   }
 
-  for (let index = 0; index < 200; index++) {
-    const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
-    const randomBola1 = Math.floor(Math.random() * MAXbolas);
-    const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
-    const randomBola2 = Math.floor(Math.random() * MAXbolas);
+  do {
+    for (let index = 0; index < 200; index++) {
+      const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
+      const randomBola1 = Math.floor(Math.random() * MAXbolas);
+      const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
+      const randomBola2 = Math.floor(Math.random() * MAXbolas);
+  
+      let aux = arrayFrascos[randomFrasco1][randomBola1];
+      arrayFrascos[randomFrasco1][randomBola1] =
+        arrayFrascos[randomFrasco2][randomBola2];
+      arrayFrascos[randomFrasco2][randomBola2] = aux;
+    }
+  } while (recorridoGanado());
 
-    let aux = arrayFrascos[randomFrasco1][randomBola1];
-    arrayFrascos[randomFrasco1][randomBola1] =
-      arrayFrascos[randomFrasco2][randomBola2];
-    arrayFrascos[randomFrasco2][randomBola2] = aux;
-  }
+
 }
 
 const inicioTempo = () => {
@@ -176,7 +183,7 @@ const inicioTempo = () => {
       inicioFin(ganado);
     }
 
-  }, 100000);
+  }, 1000);
   
 };
 
@@ -254,25 +261,8 @@ function createTextoTitulo(textoGrande=null,textoPequeño=null) {
 }
 
 const ganar = () => {
-  let ganado = true;
-  let contadorLlenas = 0;
 
-  for (let index = 0; index < arrayFrascos.length; index++) {
-    if (arrayFrascos[index].length == MAXbolas) {
-      contadorLlenas++;
-      let index2 = 1;
-      let bolaComprobar = arrayFrascos[index][0];
-      while (ganado && index2 < arrayFrascos[index].length) {
-        if (bolaComprobar != arrayFrascos[index][index2]) {
-          ganado = false;
-        }
-        index2++;
-      }
-    }
-  }
-  if (contadorLlenas != MAXfrascos - 2) {
-    ganado = false;
-  }
+  let ganado = recorridoGanado();
   console.log("ganar" + ganado);
 
   //Ahora deberia reiniciarse el TAD y el entorno y subir el nivel
@@ -297,6 +287,7 @@ const ganar = () => {
       cieloColor(nivel);
       tiempo += 10 * nivel; //cada nivel aumenta 10 segundos
     }
+    
 
 
 
@@ -444,6 +435,29 @@ const accionFrasco = (e) => {
     }
   }
 };
+
+function recorridoGanado() {
+  let ganado = true;
+  let contadorLlenas = 0;
+
+  for (let index = 0; index < arrayFrascos.length; index++) {
+    if (arrayFrascos[index].length == MAXbolas) {
+      contadorLlenas++;
+      let index2 = 1;
+      let bolaComprobar = arrayFrascos[index][0];
+      while (ganado && index2 < arrayFrascos[index].length) {
+        if (bolaComprobar != arrayFrascos[index][index2]) {
+          ganado = false;
+        }
+        index2++;
+      }
+    }
+  }
+  if (contadorLlenas != MAXfrascos - 2) {
+    ganado = false;
+  }
+  return ganado;
+}
 
 function inicioFin(ganado) {
 

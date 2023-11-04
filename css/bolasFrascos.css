@@ -30,13 +30,18 @@
     width: 70px;
     height: fit-content;
     border: 4px solid black;
+    border-top: 0;
     position: relative;
     top: 140px;
     margin: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: end;
     /*flex-direction: column-reverse;*/
     align-items: center;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+
 }
 
 .visor__frasco:hover{
