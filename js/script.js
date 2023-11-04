@@ -1,20 +1,20 @@
 let visor__main = document.getElementById("visor__main");
 let botonInicio = visor__main.children[1];
 
-let nivel = 0;
-let MAXniveles = 1;
-let MAXfrascos = 4;
-let MAXbolas = 4;
-let segundosIniciales = 60;
+let nivel;
+let MAXniveles;
+let MAXfrascos;
+let MAXbolas;
 let character_1;
-let pagina = 0;
 let posAnterior;
-let tiempo = 40;
+let tiempo;
+let tiempoBase=40;
 
 let arrayFrascos = [];
 let bolasFrascos = [];
-//let bolaCambio;
 let click = true;
+
+let intervalo;
 
 let FIN = false;
 
@@ -145,13 +145,19 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 
 const iniciaEntorno = () => {
 
-  debugger;
   if (!audioBg.paused) {
     audioBg.pause();
     audioBg.currentTime = 0;
   }
 
   audioBg.play();
+
+  if (arrayFrascos.length!=0) {
+    arrayFrascos=[];
+  }
+  if (bolasFrascos.length!=0) {
+    bolasFrascos=[];
+  }
 
   //inicioTempo();
   character_1 = visor__main.querySelector("#character_1");
@@ -165,7 +171,12 @@ const iniciaEntorno = () => {
     textoTitulo.remove();
   }
 
-  
+  tiempo = 40;
+  nivel = 0;
+  MAXniveles = 2;
+  MAXfrascos = 4;
+  MAXbolas = 4;
+
   tableroRand();
   actualizarEntorno();
   inicioTempo();
@@ -187,7 +198,8 @@ function tableroRand() {
   }
 
   do {
-    for (let index = 0; index < 200; index++) {
+    //Barajo las bolas tantas veces como bolas por frascos haya
+    for (let index = 0; index < MAXfrascos * (MAXfrascos-2); index++) {
       const randomFrasco1 = Math.floor(Math.random() * (MAXfrascos - 2));
       const randomBola1 = Math.floor(Math.random() * MAXbolas);
       const randomFrasco2 = Math.floor(Math.random() * (MAXfrascos - 2));
@@ -198,7 +210,8 @@ function tableroRand() {
         arrayFrascos[randomFrasco2][randomBola2];
       arrayFrascos[randomFrasco2][randomBola2] = aux;
     }
-  } while (recorridoGanado());
+  }  // si invierto la comprobación, el tablero comienza ordenado 
+   while (recorridoGanado()); // Comprueblo que el tablero generado no se genera comienza ordenado
 
 
 }
@@ -214,7 +227,7 @@ const inicioTempo = () => {
   visorHeader__div__temporizador.children[1].textContent =
     minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
 
-  const intervalo = setInterval(() => {
+  intervalo = setInterval(() => {
     tiempo--;
 
     let minutos = Math.floor(tiempo / 60).toString();
@@ -224,8 +237,7 @@ const inicioTempo = () => {
       minutos.padStart(2, "0") + ":" + segundos.padStart(2, "0");
 
     if (tiempo == 0) {
-      clearInterval(intervalo);
-      tiempo = 0;
+      debugger;
       ganado=false;
       audioPerder();
       borraEntorno();
@@ -319,12 +331,16 @@ const ganar = () => {
     arrayFrascos = [];
     bolasFrascos = [];
     if (nivel==MAXniveles) {
+
+
       audioGanar();
       borraEntorno();
       tiempo = 0;
       cieloColor(2);
       inicioFin(ganado);
     } else{
+
+
       audioLevelUp();
       MAXbolas++;
       MAXfrascos++;
@@ -333,7 +349,7 @@ const ganar = () => {
       actualizarEntorno();
       nivel++;
       cieloColor(nivel);
-      tiempo += 10 * nivel; //cada nivel aumenta 10 segundos
+      tiempo = tiempoBase + 10 * nivel; //cada nivel aumenta 10 segundos
     }
     
 
@@ -515,6 +531,9 @@ function recorridoGanado() {
 }
 
 function inicioFin(ganado) {
+  debugger
+
+  apagarTemporizador();
 
   if (ganado) {
     console.log("Ganado");
@@ -535,7 +554,6 @@ function inicioFin(ganado) {
       createTextoTitulo("INTENTALO DE NUEVO","PUEDES CONSEGUIRLO!");
     }
 
-      debugger;
   
       character_1=cargaPersonaje();
       visor__main.append(character_1);
@@ -547,6 +565,12 @@ function inicioFin(ganado) {
   }, 4000);
 
 
+}
+
+function apagarTemporizador() {
+  const tablero = visor__main.previousElementSibling.querySelector('#visorHeader__div__temporizador');
+  tablero.children[1].textContent = "00:00";
+  clearInterval(intervalo);
 }
 
 function creaBotonStart() {
