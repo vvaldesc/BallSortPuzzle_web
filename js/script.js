@@ -17,6 +17,10 @@ let intervalo;
 
 let FIN = false;
 
+let audioBg = new Audio('./assets/audio/musicaBackground.wav');
+audioBg.volume = 0.1;
+audioBg.loop = true;
+
 /*const audioFondo = () => {
     let audioFondo = new Audio('./assets/audio/musicaBackground.wav');
     audioFondo.volume = 0.1;
@@ -34,9 +38,7 @@ const audioBg = audioFondo();*/
 })*/
 
 //inicializo el audio de fondo de forma global como audioBg
-let audioBg = new Audio('./assets/audio/musicaBackground.wav');
-audioBg.volume = 0.1;
-audioBg.loop = true;
+
 
 
 
@@ -157,7 +159,6 @@ function actualizarEntorno(posAnt = null, posPost = null) {
 }
 
 const iniciaEntorno = () => {
-debugger
   if (!audioBg.paused) {
     audioBg.pause();
     audioBg.currentTime = 0;
@@ -187,7 +188,7 @@ debugger
   //configuración de constantes. (Son los parámetros con los que empieza el juego, van cambiando por cada nivel)
   tiempo = 40;
   nivel = 0;
-  MAXniveles = 1;
+  MAXniveles = 3;
   MAXfrascos = 4;
   MAXbolas = 4;
 
@@ -195,8 +196,6 @@ debugger
   actualizarEntorno();
   inicioTempo();
   cieloColor(nivel);
-
-
 };
 
 function tableroRand() {
@@ -277,17 +276,6 @@ function cargaPersonaje() {
 
 const inicioIntro = () => {
 
-
-
-  const hablaPersonaje = () => {
-    for (let index = 0; index < 10; index++) {
-      character_1.src = "../assets/png/character_1.png";
-      setTimeout(100);
-      character_1.src = "../assets/png/character_2.png";
-    }
-  };
-
-  function secuenciaIntro() {
     createTextoTitulo("LAS AVENTURAS DE THEO","BallSortPuzzle");
 
     //primer timeOu
@@ -305,10 +293,7 @@ const inicioIntro = () => {
         section__a.addEventListener("click", iniciaEntorno);
       }, 4000);
     }, 4000);
-  }
 
-  //hablaPersonaje();
-  secuenciaIntro();
 
 };
 
@@ -361,7 +346,6 @@ const ganar = () => {
       borraEntorno();
       tableroRand();
       actualizarEntorno();
-      nivel++;
       cieloColor(nivel);
       tiempo = tiempoBase + 10 * nivel; //cada nivel aumenta 10 segundos
     }
@@ -587,6 +571,7 @@ function apagarTemporizador() {
   clearInterval(intervalo);
 }
 
+//Crea boto
 function creaBotonStart() {
 
   main__section = document.createElement("SECTION");

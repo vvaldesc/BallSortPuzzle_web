@@ -28,6 +28,7 @@ body{
     background-size: 370px;
 
     width: 1300px;
+    border: 3px solid blue;
 
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-rows: 100px 700px 100px;

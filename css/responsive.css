@@ -21,7 +21,7 @@
 
 @media screen and (min-width: 600px){
     .container{
-        transform: scale(0.1);
+        transform: scale(0.4);
     }
 }
 
@@ -42,12 +42,3 @@
         transform: scale(1);
     }
 }
-
-
-
-/*@media screen and (min-width: 1200px){
-    .container{
-
-    }
-}*/
-
