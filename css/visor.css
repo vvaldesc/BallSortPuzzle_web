@@ -9,7 +9,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border: 1px solid green;
 }
 
 .fondoGris1{
@@ -61,7 +60,7 @@
     z-index: 0;
     background-color: rgb(175, 226, 255);
     /* podriía ser overflow:hidden y alomejor inherit */
-    
+    border: 10px solid black;
 }
 
 
@@ -160,9 +159,8 @@
 .visor__main{
     /*display: flex;*/
     width: 100%;
-    height: 100%;
+    height: 80%;
     position: relative;
-    border: 1px solid red;
     overflow: hidden;
 }
 

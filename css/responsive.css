@@ -19,26 +19,33 @@
     grid-area: footer;
 }
 
+/*
+@media screen and (min-width: 200px){
+    body{
+        transform: scaleX(0.2);
+        transform: scaleY(0.2);
+    }
+}
+
 @media screen and (min-width: 600px){
-    .container{
-        transform: scale(0.4);
+    body{
+        transform: scale(0.5);
+        transform: ;
     }
 }
 
 @media screen and (min-width: 1024px){
     body{
-        transform: scale(0.5);
-    }
-    .container{
-        transform: scale(0.5);
+        transform: scale(0.7);
     }
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1330px){
     .container{
-        transform: scale(0.9);
+        transform: scale(1);
     }
     body{
         transform: scale(1);
     }
 }
+*/

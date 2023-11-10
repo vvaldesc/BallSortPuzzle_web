@@ -367,8 +367,20 @@ const cieloColor = (nivel) => {
   const bg = cielo.firstChild.nextSibling;
   switch (nivel) {
     case 0:
+
+
+      /*if (cielo.classList.length>0) {
+        cielo.classList[0].remove()
+      }*/
+
+
       cielo.classList.remove("cieloInicial")
       cielo.classList.add("cieloGris");
+
+
+      /*if (cielo.classList.length>1) {
+        cielo.classList[1].remove()
+      }*/
 
       bg.classList.add("fondoGris1");
     break;
@@ -408,7 +420,12 @@ const accionFrasco = (e) => {
       if (click) {
         audioSacaBola();
         posAnterior = parseInt(e.target.parentNode.id.slice(6));
-        e.target.parentNode.firstChild.style.top = "-75px";
+
+        
+        let numeroBolas=arrayFrascos[posAnterior].length; //Cada bola mide 40px
+        //La bola ha de estar 75 px encima del frasco aprox (sin contar posible margin o padding)
+        e.target.parentNode.firstChild.style.top = "-" + ((MAXbolas - numeroBolas) * 40 + 75) . toString() +"px";
+
         click = false;
       } else {
         posicionMeter = parseInt(e.target.parentNode.id.slice(6));
@@ -461,7 +478,12 @@ const accionFrasco = (e) => {
         audioSacaBola();
         //bolaCambio = e.target.parentNode.firstChild.classList[1].slice(5);
         posAnterior = parseInt(e.target.id.slice(6));
-        e.target.firstChild.style.top = "-75px";
+
+        let numeroBolas=arrayFrascos[posAnterior].length; //Cada bola mide 40px
+        //La bola ha de estar 75 px encima del frasco aprox (sin contar posible margin o padding)
+        e.target.firstChild.style.top = "-" + ((MAXbolas - numeroBolas) * 40 + 75) . toString() +"px";
+
+        
         click = false;
       } else {
         posicionMeter = parseInt(e.target.id.slice(6));
@@ -529,7 +551,6 @@ function recorridoGanado() {
 }
 
 function inicioFin(ganado) {
-  debugger
 
   apagarTemporizador();
 
@@ -542,7 +563,6 @@ function inicioFin(ganado) {
   }
 
   setTimeout(() => {
-    debugger;
 
     visor__div__texto.remove();
 
