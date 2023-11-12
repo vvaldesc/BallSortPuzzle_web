@@ -368,10 +368,10 @@ const cieloColor = (nivel) => {
   switch (nivel) {
     case 0:
       debugger
-      cielo.classList=[...cielo.classList].filter((clase) => clase != "cieloAzul" && clase != "cieloInicial");
+      cielo.classList=[...cielo.classList].filter((clase) => clase != "cieloAzul" && clase != "cieloInicial" && clase != "cieloGris"  && clase != "cieloNaranja");
       cielo.classList.add("cieloGris");
 
-      bg.classList=[...bg.classList].filter((clase) => clase != "fondoGris3");
+      bg.classList=[...bg.classList].filter((clase) => clase != "fondoGris3" && clase != "fondoGris2" && clase != "fondoGris1");
       bg.classList.add("fondoGris1");
     break;
     case 1:
