@@ -367,21 +367,11 @@ const cieloColor = (nivel) => {
   const bg = cielo.firstChild.nextSibling;
   switch (nivel) {
     case 0:
-
-
-      /*if (cielo.classList.length>0) {
-        cielo.classList[0].remove()
-      }*/
-
-
-      cielo.classList.remove("cieloInicial")
+      debugger
+      cielo.classList=[...cielo.classList].filter((clase) => clase != "cieloAzul" && clase != "cieloInicial");
       cielo.classList.add("cieloGris");
 
-
-      /*if (cielo.classList.length>1) {
-        cielo.classList[1].remove()
-      }*/
-
+      bg.classList=[...bg.classList].filter((clase) => clase != "fondoGris3");
       bg.classList.add("fondoGris1");
     break;
     case 1:
