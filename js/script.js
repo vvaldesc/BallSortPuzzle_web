@@ -243,7 +243,8 @@ function cargaPersonaje() {
   character_1.style.left = "650px";
   character_1.style.top = "90px";
   character_1.id = "character_1";
-  character_1.src = "../assets/png/character_2.png";
+  character_1.alt = "Theo_personaje"
+  character_1.src = "assets/png/character2.png";
   return character_1;
 }
 
