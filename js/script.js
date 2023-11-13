@@ -244,6 +244,7 @@ function cargaPersonaje() {
   character_1.style.top = "90px";
   character_1.id = "character_1";
   character_1.alt = "Theo_personaje"
+  debugger;
   character_1.src = "assets/png/character2.png";
   return character_1;
 }
@@ -258,6 +259,7 @@ const inicioIntro = () => {
 
     setTimeout(() => {
       visor__div__texto.remove();
+      debugger;
       character_1 = cargaPersonaje();
       visor__main.append(character_1);
       creaBotonStart();
