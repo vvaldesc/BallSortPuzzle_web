@@ -17,11 +17,12 @@ let intervalo;
 
 let FIN = false;
 
+
+//inicializo el audio de fondo de forma global como audioBg
 let audioBg = new Audio("./assets/audio/musicaBackground.wav");
 audioBg.volume = 0.1;
 audioBg.loop = true;
 
-//inicializo el audio de fondo de forma global como audioBg
 
 const audioSacaBola = () => {
   let audio = new Audio("./assets/audio/sacarBola.wav");
@@ -201,7 +202,8 @@ function tableroRand() {
         arrayFrascos[randomFrasco2][randomBola2];
       arrayFrascos[randomFrasco2][randomBola2] = aux;
     }
-  } while (recorridoGanado()); // si invierto la comprobación, el tablero comienza ordenado // Comprueblo que el tablero generado no se genera comienza ordenado
+  } while (recorridoGanado()); // si invierto la comprobación, el tablero comienza ordenado 
+  // Compruebo que el tablero generado no se genera comienza ordenado
 }
 
 const inicioTempo = () => {
@@ -327,7 +329,6 @@ const cieloColor = (nivel) => {
   const bg = cielo.firstChild.nextSibling;
   switch (nivel) {
     case 0:
-      debugger;
       cielo.classList = [...cielo.classList].filter(
         (clase) =>
           clase != "cieloAzul" &&
@@ -549,7 +550,6 @@ function apagarTemporizador() {
   clearInterval(intervalo);
 }
 
-//Crea boto
 function creaBotonStart() {
   main__section = document.createElement("SECTION");
   section__a = document.createElement("A");
