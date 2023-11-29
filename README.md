@@ -8,3 +8,7 @@ https://vvaldesc.github.io/BallSortPuzzle_web/
 ![image](https://github.com/vvaldesc/BallSortPuzzle_web/assets/124901115/c83b28b5-a402-4212-816e-bb1225582703)
 
 ![image](https://github.com/vvaldesc/BallSortPuzzle_web/assets/124901115/626d028e-dfbf-4525-8b79-6176dfb2264b)
+
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=vvaldesc&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=vvaldesc&layout=compact&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
