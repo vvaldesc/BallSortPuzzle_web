@@ -1,5 +1,8 @@
-﻿# BallSortPuzzle_web
+# BallSortPuzzle_web
 Juego para la asignatura de Desarrollo Web en Entorno Cliente desarrollado en Java Script.
+
+El juego está programado en base a programación procedimental.
+Calificado con sobresaliente.
 
 https://vvaldesc.github.io/BallSortPuzzle_web/
 
